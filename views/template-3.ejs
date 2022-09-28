@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1366">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./template-css/purpler_basic.css">
+    <link rel="stylesheet" href="./template-css/template-3.css">
+    <link rel="shortcut icon" href="../assets/images/favicon (3).ico" type="image/profile">
+    <title>Generated Invoice</title>
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-4" href="../index.html#home"><img src="../assets/images/logo2.png" alt="Logo" width="220" height="50" class="d-inline-block align-text-top"></a>
+            <!-- <a class="navbar-brand mx-4 my-2" href="../index.html#home">
+                <h4>Invoice<span>Genie</span></h4>
+            </a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-columns-gap"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link mx-4" aria-current="page" href="../index.html#home">Home</a>
+                    <a class="nav-link mx-4" href="../index.html#features">Features</a>
+                    <a class="nav-link mx-4" href="../index.html#steps">Steps</a>
+                    <a class="nav-link mx-4" href="../index.html#templates">Templates</a>
+                </div>
+                <!-- <div class="btn btn-primary mx-4">Save</div> -->
+            </div>
+        </div>
+    </nav>
+    <!-- /navbar -->
+
+    <!-- Create invoice -->
+    <div class="container text-center justify-content-center pt-5" id="make-invoice">
+        <h1 class="heading display-6 h1 mb-5">Your Invoice is Ready to Download!</h1>
+    </div>
+    <!-- /Create invoice -->
+
+    <!-- *******************************************Div to be converted in PDF******************************************-->
+    <!-- Main container -->
+    <div class="container text-center invoice-form-section">
+        <div class="invoice-print-form" id="to-be-printed">
+            <div class="container logo-from-to-more-details">
+                <div class="row invoice-text text-center pt-2">
+                    <div class="col-2">
+                        <h3 class="display-6" id="Invoice-title">Invoice</h3>
+                    </div>
+                    <div class="col logo-col">
+                        <div class="invoice-logo-img">
+                            <img class="rounded" src="../assets/images/image-placeholder1.png" alt="" id="invoice-logo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mx-2 my-1">
+                    <div class="col-4">
+                        <div class="invoice-infor-container text-start">
+                            <h6 id="invoice-details-text">Invoice Details</h6>
+                            <div class="row inline-box-for-info invoice-details">
+                                <div class="col invoice"><p>Invoice no.</p></div>
+                                <div class="col invoice"><small id="invoice-number">A0001</small></div>
+                            </div>
+                            <div class="row inline-box-for-info invoice-details">
+                                <div class="col invoice"><p>Invoice Date</p></div>
+                                <div class="col invoice"><small id="invoice-date">14-09-2022</small></div>
+                            </div>
+                            <div class="row inline-box-for-info invoice-details d-none" id="due-date-con">
+                                <div class="col invoice"><p>Due Date</p></div>
+                                <div class="col invoice"><small id="due-date">17-09-2022</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mx-2 my-4 justify-content-between">
+                    <div class="col-5 from-col mx-2">
+                        <div class="from-invoice-container text-start">
+                            <h6 id="from-text">From</h6>
+                            <h6 id="from-name"><strong>Omkar Shinde</strong></h6>
+                            <small id="from-add">Maharashtra Nagar, Mankhurd, Mumbai - 400088</small>
+                        </div>
+                    </div>
+                    <div class="col-5 to-col mx-2">
+                        <div class="to-invoice-container text-start">
+                            <h6 id="to-text">To</h6>
+                            <h6 id="to-name"><strong>Aniket Shinde</strong></h6>
+                            <small id="to-add">Maharashtra Nagar, Mankhurd, Mumbai - 400088</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col more-details">
+                        <div class="more-details-container text-start" id="more-details-con">
+                            <!-- <div class="more-details-inside-container">
+                                <p>Subject</p>
+                                <small>Hired Vehicle bill for E.E. (Admin) vashi zone for the month of AUGUST 2022</small>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invoice Table -->
+            <div class="invoice-info-table-container table-responsive">
+                <table class="table">
+                    <thead class="table-dark">
+                      <tr class="text-start" id="thead">
+                      </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                  </table>
+            </div>
+            <!-- /Invoice Table -->
+
+            <!-- Additional Notes & Total -->
+            <div class="row notes-container-border">
+                <div class="col-6">
+                    <div class="additional-notes-total-container my-4">
+                        <div class="additional-notes-container text-start">
+                            <p class="title mb-3">TOTAL (IN WORDS): <span id="number-to-word">FORTY NINE THOUSAND RUPEES ONLY</span></p>
+                            <p class="title additional-notes-con mb-1 d-none">Aditional Notes</p>
+                            <small class="notes d-none"></small>
+                        </div>
+                    </div>
+                    <div class="terms-conditions-container text-start d-none" id="terms-conditions-con">
+                        <p class="title mb-1 mt-3">Terms and Conditions</p>
+                        <small class="terms">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facere animi cum, recusandae quas voluptatem <br><br> voluptas voluptates repudiandae at facilis atque molestiae doloribus neque deserunt praesentium, nobis, enim voluptatum? Voluptate.</small>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="total-div-container my-4 pe-3">
+                        <div class="inline-box-for-info total d-none" id="total-tax">
+                            <small>Deductions</small>
+                            <p id="total-tax-amt">&#8377;5000</p>
+                        </div>
+                        <div class="inline-box-for-info total" id="sub-total">
+                            <small>Sub Total</small>
+                            <p id="sub-total-amt">&#8377;50000</p>
+                        </div>
+                        <div class="inline-box-for-info total d-none" id="total-discout">
+                            <small>Discount(&#8377;)</small>
+                            <p id="total-discount-amt">-&#8377;1000</p>
+                        </div>
+                        <hr>
+                        <div class="inline-box-for-info all-total" id="total-due">
+                            <small id="total-text">Total</small>
+                            <p id="total-due-amt">&#8377;49000</p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="bank-details-div-container d-none" id="bank-details-con">
+                        <div class="inline-box-for-info bank">
+                            <p class="title mb-1 mt-3">Bank & Payment Details</p>
+                        </div>
+                        <div class="row inline-box-for-info bank bank-details d-none" id="accHolderName">
+                            <div class="col-5 text-start">
+                                <small>Account Holder name</small>
+                            </div>
+                            <div class="col-7 text-start">
+                                <p id="acc-holder-name"></p>
+                            </div>
+                        </div>
+                        <div class="row inline-box-for-info bank bank-details d-none" id="accNumber"">
+                            <div class="col-5 text-start">
+                                <small>Account Number</small>
+                            </div>
+                            <div class="col-7 text-start">
+                                <p id="acc-number"></p>
+                            </div>
+                        </div>
+                        <div class="row inline-box-for-info bank bank-details d-none" id="bankIFSC">
+                            <div class="col-5 text-start">
+                                <small>IFSC</small>
+                            </div>
+                            <div class="col-7 text-start">
+                                <p id="bank-ifsc"></p>
+                            </div>
+                        </div>
+                        <div class="row inline-box-for-info bank bank-details d-none" id="accType">
+                            <div class="col-5 text-start">
+                                <small>Account type</small>
+                            </div>
+                            <div class="col-7 text-start">
+                                <p id="acc-type"></p>
+                            </div>
+                        </div>
+                        <div class="row inline-box-for-info bank bank-details d-none" id="bankName">
+                            <div class="col-5 text-start">
+                                <small>Bank Name</small>
+                            </div>
+                            <div class="col-7 text-start">
+                                <p id="bank-name"></p>
+                            </div>
+                        </div>
+                        <div class="row inline-box-for-info bank bank-details d-none" id="upiID">
+                            <div class="col-5 text-start">
+                                <small>UPI ID</small>
+                            </div>
+                            <div class="col-7 text-start">
+                                <p id="upi-id"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- /Additional Notes & Total -->
+        </div>
+        <!-- *******************************************/Div to be converted in PDF******************************************-->
+    </div>
+
+
+
+    <!-- Save and continue button -->
+    <div class="container save-and-continue-con py-3 justify-content-center">
+        <div class="btn btn-primary mx-4" id="download-as-pdf">Download as PDF</div>
+        <div class="spinner-border text-primary spinner-border-sm d-none" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <i class="bi bi-check-circle-fill d-none" id="check"></i>
+    </div>
+    <!-- Save and continue button -->
+    </div>
+    <!-- /Main Container -->    
+    <div class="space-below pt-5"></div>
+    <hr>
+    <!-- footer -->
+    <div class="container-fluid footer-section text-center">
+        <div>
+            <a class="navbar-brand mx-4 my-2" href="../index.html#home"><img src="../assets/images/logo2.png" alt="Logo" width="220" height="50" class="d-inline-block align-text-top"></a>
+        </div>
+        <!-- <a class="navbar-brand mx-4 my-2 footer-logo" href="../index.html#home">
+            <h3 class="footer-logo-text">Invoice<span>Genie</span>&#8482;</h3>
+        </a> -->
+        <a href="https://github.com/OmkarShinde1996/invoice-genie" target="_blank"><i class="bi bi-github"></i></a>
+    </div>
+    <!-- /footer -->
+
+
+
+
+    <!-- ************************************Scripts******************************** -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js" integrity="sha512-ICHkAOXzVDEkL5xkXjAWRV/hx6Bq4ID/uhRcnj9zS7QCdCbhVtfgjwt/vTfUBtW1wzBkErImU0huK3LDVeEr8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js" integrity="sha512-1g3IT1FdbHZKcBVZzlk4a4m5zLRuBjMFMxub1FeIRvR+rhfqHFld9VFXXBYe66ldBWf+syHHxoZEbZyunH6Idg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../assets/js/fillData.js"></script>
+    <script src="../assets/js/calculations.js"></script>
+    <script src="../assets/js/pdfDownload.js"></script>
+    <script src="../assets/js/numberToWord.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+</html>
