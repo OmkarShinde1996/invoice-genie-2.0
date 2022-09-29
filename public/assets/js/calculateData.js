@@ -2,7 +2,8 @@
 // Logo Image and Invoice Text block element
 let actualInvoiceText
 const invoiceBody = document.querySelector('invoice-logo')
-const previousImgUrl = "https://omkarshinde1996.github.io/invoice-genie/assets/images/image-placeholder1.png"
+// const previousImgUrl = "https://omkarshinde1996.github.io/invoice-genie/assets/images/image-placeholder1.png"
+const previousImgUrl = "http://localhost:3000/assets/images/image-placeholder1.png"
 let logoImageUrl = {}
 
 // Invoice details block elements
@@ -76,6 +77,7 @@ function allInOnePack(){
     makeTableArray()
     getRequiredFields()
     storeDataInSessionStorage()
+    getAllData()
 }
 ///////////////////////////////////////////////////////////////
 
@@ -266,8 +268,6 @@ let saveAndContinueBtn = document.querySelector('.save-and-continue-con a')
 window.onload = function(){
     addRow()
     getRequiredFields()
-    let templateURL = sessionStorage.getItem('templateURL')
-    saveAndContinueBtn.href = templateURL
 }
 
 function getRequiredFields(){
@@ -315,4 +315,36 @@ function storeDataInSessionStorage(){
     // const tableJson_deSerialize = JSON.parse(localStorage.getItem('tableJson'))
     // console.log(tableJson_deSerialize)
 
+}
+
+function getAllData(){
+
+    const data = {
+        additionalNotesObject:additionalNotesObject,
+        invoiceDetailsObject:invoiceDetailsObject,
+        termsAndConditionsObject:termsAndConditionsObject,
+        tableArray:tableArray,
+        actualInvoiceText:actualInvoiceText,
+        invoiceMoreDetailsObject:invoiceMoreDetailsObject,
+        toDetailsObject:toDetailsObject,
+        logoImageUrl:logoImageUrl,
+        totalTaxObject:totalTaxObject,
+        bankDetailsObject:bankDetailsObject,
+        fromDetailsObject:fromDetailsObject,
+    }
+    fetch('/api/validateJson', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{
+            'content-type': 'application/json'
+        }
+    }).then(res => console.log(res)).then(data => {
+        if(data.status == 'error'){
+            console.log('Error in receiving the data');
+        }else{
+            console.log(data.success)
+        }
+    })
+
+    // .then(res => res.json()).then(data => console.log(data))
 }

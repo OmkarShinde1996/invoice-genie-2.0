@@ -266,8 +266,6 @@ let saveAndContinueBtn = document.querySelector('.save-and-continue-con a')
 window.onload = function(){
     addRow()
     getRequiredFields()
-    let templateURL = sessionStorage.getItem('templateURL')
-    saveAndContinueBtn.href = templateURL
 }
 
 function getRequiredFields(){

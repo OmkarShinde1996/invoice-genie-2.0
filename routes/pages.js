@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
+// const validateJson = require('../controllers/validateJson')
 
-
+let template = ""
+let dataCollected
 
 router.get('/', (req,res)=>{
     res.render('index')
@@ -9,15 +11,15 @@ router.get('/', (req,res)=>{
 
 router.get('/fillInvoice', (req,res)=>{
     res.render('fill_invoice')
-    console.log(req.query);
+    template = req.query.templateId
+    dataCollected = req.body
+    console.log(template);
 })
 
-// const getTemplateId = (e)=>{
-//     fetch('/clicked', {
-//         method: 'POST', 
-//         body: JSON.stringify({ id: e.currentTarget.id }),
-//     })
-// }
+router.get('/invoiceGenerated', (req,res)=>{
+    console.log(template);
+    res.render(`${template}`)
+})
 
 
 module.exports = router

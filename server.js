@@ -12,8 +12,9 @@ const mysql = require('mysql')
 const app = express()
 const port = process.env.PORT
 
-app.use('/js', express.static(__dirname + '/public/js'))
-app.use('/css', express.static(__dirname + '/public/css'))
+app.use('/js', express.static(__dirname + '/public/assets/js'))
+app.use('/css', express.static(__dirname + '/public/assets/css'))
+app.use('/template-css', express.static(__dirname + '/public/templates/template-css'))
 app.set('view engine','ejs')
 app.use(express.static('public'))
 app.use(cookie())
@@ -25,6 +26,6 @@ db.connect((err) => {
 })
 
 app.use('/', require('./routes/pages'))
-// app.use('/api', require('./controllers/auth'))
+app.use('/api', require('./controllers/validate'))
 app.listen(port, ()=> console.log(`Server started on port: ${port}`))
 
