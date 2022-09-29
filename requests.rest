@@ -1,0 +1,53 @@
+
+GET http://localhost:3000/api/validateJson
+
+
+###
+
+POST http://localhost:3000/api/validateJson
+Content-Type: application/json
+
+{
+  "additionalNotesObject": {},
+  "invoiceDetailsObject": { "Invoice No.": "A0001", "Invoice Date": "2022-02-12" },
+  "termsAndConditionsObject": {},
+  "tableArray": [
+    [
+      "#",
+      "Item/Item Description",
+      "Quantity",
+      "Rate(₹)",
+      "Amount(₹)"
+    ],
+    [ 1, "item 1", "1", "10", "10.00" ]
+  ],
+  "actualInvoiceText": "Invoice",
+  "invoiceMoreDetailsObject": {},
+  "toDetailsObject": {
+    "toTitle": "To",
+    "toName": "Aniket Shinde",
+    "toAddress": "Maharashtra Nagar, Mankhurd",
+    "toCity": "Navi Mumbai",
+    "toState": "Maharashtra",
+    "toCountry": "India",
+    "toZip": "400078"
+  },
+  "logoImageUrl": {
+    "logoUrl": "http://localhost:3000/assets/images/image-placeholder1.png"
+  },
+  "totalTaxObject": {
+    "Discount(₹)": "-&#8377; 0",
+    "subTotal": "&#8377; 10.00",
+    "Total": "&#8377; 10.00"
+  },
+  "bankDetailsObject": {},
+  "fromDetailsObject": {
+    "fromTitle": "From",
+    "fromName": "omkar tours.'",
+    "fromAddress": "shivprerna chwal, maharashtra nagar,",
+    "fromCity": "Mumbai",
+    "fromState": "Maharashtra",
+    "fromCountry": "India",
+    "fromZip": "400088"
+  }
+}
