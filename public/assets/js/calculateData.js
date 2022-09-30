@@ -338,13 +338,7 @@ function getAllData(){
         headers:{
             'content-type': 'application/json'
         }
-    }).then(res => console.log(res)).then(data => {
-        if(data.status == 'error'){
-            console.log('Error in receiving the data');
-        }else{
-            console.log(data.success)
-        }
-    })
+    }).then(res => res.json()).then(data => console.log(data))
 
     // .then(res => res.json()).then(data => console.log(data))
 }

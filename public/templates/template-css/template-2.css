@@ -14,6 +14,10 @@ h1, h2, h3, h4, h5, h6, p, small, div{
     background-color: transparent;
 }
 
+.navbar{
+    --bs-navbar-padding-y: 0 !important;
+}
+
 /* **********************************Basic template formatting********************************** */
 
 #Invoice-title{
@@ -215,3 +219,8 @@ hr{
     font-size: 12px;
     font-weight: 500;
 }
+
+.modal-backdrop{
+    position: unset !important;
+}
+

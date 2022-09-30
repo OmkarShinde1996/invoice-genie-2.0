@@ -13,31 +13,11 @@
 </head>
 <body>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand mx-4" href="/"><img src="../assets/images/logo2.png" alt="Logo" width="220" height="50" class="d-inline-block align-text-top"></a>
-            <!-- <a class="navbar-brand mx-4 my-2" href="../index.html#home">
-                <h4>Invoice<span>Genie</span></h4>
-            </a> -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi bi-columns-gap"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link mx-4" aria-current="page" href="../index.html#home">Home</a>
-                    <a class="nav-link mx-4" href="../index.html#features">Features</a>
-                    <a class="nav-link mx-4" href="../index.html#steps">Steps</a>
-                    <a class="nav-link mx-4" href="../index.html#templates">Templates</a>
-                </div>
-                <!-- <div class="btn btn-primary mx-4">Save</div> -->
-            </div>
-        </div>
-    </nav>
+    <%- include('../partials/navbar.ejs');%>
     <!-- /navbar -->
 
     <!-- Create invoice -->
-    <div class="container text-center justify-content-center pt-5" id="make-invoice">
+    <div class="container text-center justify-content-center pt-5 mt-5" id="make-invoice">
         <h1 class="heading display-6 h1 mb-5">Your Invoice is Ready to Download!</h1>
     </div>
     <!-- /Create invoice -->
@@ -246,15 +226,7 @@
     <div class="space-below pt-5"></div>
     <hr>
     <!-- footer -->
-    <div class="container-fluid footer-section text-center">
-        <div>
-            <a class="navbar-brand mx-4 my-2" href="/"><img src="../assets/images/logo2.png" alt="Logo" width="220" height="50" class="d-inline-block align-text-top"></a>
-        </div>
-        <!-- <a class="navbar-brand mx-4 my-2 footer-logo" href="../index.html#home">
-            <h3 class="footer-logo-text">Invoice<span>Genie</span>&#8482;</h3>
-        </a> -->
-        <a href="https://github.com/OmkarShinde1996/invoice-genie" target="_blank"><i class="bi bi-github"></i></a>
-    </div>
+    <%- include('../partials/footer.ejs');%>
     <!-- /footer -->
 
 
