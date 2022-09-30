@@ -76,6 +76,7 @@ function allInOnePack(){
     makeTableArray()
     getRequiredFields()
     storeDataInSessionStorage()
+    getAllData()
 }
 ///////////////////////////////////////////////////////////////
 
@@ -313,4 +314,36 @@ function storeDataInSessionStorage(){
     // const tableJson_deSerialize = JSON.parse(localStorage.getItem('tableJson'))
     // console.log(tableJson_deSerialize)
 
+}
+
+function getAllData(){
+
+    const data = {
+        additionalNotesObject:additionalNotesObject,
+        invoiceDetailsObject:invoiceDetailsObject,
+        termsAndConditionsObject:termsAndConditionsObject,
+        tableArray:tableArray,
+        actualInvoiceText:actualInvoiceText,
+        invoiceMoreDetailsObject:invoiceMoreDetailsObject,
+        toDetailsObject:toDetailsObject,
+        logoImageUrl:logoImageUrl,
+        totalTaxObject:totalTaxObject,
+        bankDetailsObject:bankDetailsObject,
+        fromDetailsObject:fromDetailsObject,
+    }
+    fetch('/api/validateJson', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{
+            'content-type': 'application/json'
+        }
+    }).then(res => console.log(res)).then(data => {
+        if(data.status == 'error'){
+            console.log('Error in receiving the data');
+        }else{
+            console.log(data.success)
+        }
+    })
+
+    // .then(res => res.json()).then(data => console.log(data))
 }

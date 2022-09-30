@@ -10,6 +10,7 @@
 
 .navbar{
     background-color: white;
+    --bs-navbar-padding-y: 0 !important;
 }
 
 .navbar-toggler{
@@ -691,4 +692,8 @@ textarea{
         width: 150px;
         height: 30px;
     }
+}
+
+.modal-backdrop{
+    position: unset !important;
 }

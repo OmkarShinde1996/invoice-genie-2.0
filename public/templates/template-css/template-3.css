@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5, h6, p, small, div{
     background-color: transparent;
 }
 
+.navbar{
+    --bs-navbar-padding-y: 0 !important;
+}
+
 /* **********************************Basic template formatting********************************** */
 
 #Invoice-title{
@@ -212,4 +216,8 @@ hr{
 
 #check{
     color: #407BFF;
+}
+
+.modal-backdrop{
+    position: unset !important;
 }

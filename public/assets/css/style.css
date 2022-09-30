@@ -11,6 +11,7 @@
 
 .navbar{
     background-color: white;
+    --bs-navbar-padding-y: 0 !important;
 }
 
 .navbar-toggler{
@@ -60,8 +61,9 @@ h4 span{
 
 .btn{
     font-size: 13px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
+
 
 /* Home section */
 
@@ -298,9 +300,21 @@ h3 span{
     color: #407BFF;
 }
 
+
+
 @media only screen and (max-width: 320px) {
     .logo-img{
         width: 150px;
         height: 30px;
     }
+}
+
+.modal-backdrop{
+    position: unset !important;
+}
+
+.bi-person-circle{
+    font-size: 30px;
+    cursor: pointer;
+    color: #48BCFF;
 }
