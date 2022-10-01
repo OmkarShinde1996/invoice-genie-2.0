@@ -692,3 +692,16 @@ textarea{
         height: 30px;
     }
 }
+
+.input-control.success input{
+    border-color: #407BFF;
+}
+
+.input-control.error input{
+    border-color: #ff3860;
+}
+
+.input-control .error{
+    color: #ff3860;
+    font-size: 10px;
+}

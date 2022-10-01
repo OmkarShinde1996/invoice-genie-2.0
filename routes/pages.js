@@ -1,25 +1,45 @@
 const express = require('express')
 const router = express.Router()
+const loggedIn = require('../controllers/loggedin')
+const logout = require('../controllers/logout')
+
 // const validateJson = require('../controllers/validateJson')
 
 let template = ""
 let dataCollected
 
-router.get('/', (req,res)=>{
-    res.render('index')
+router.get('/', loggedIn, (req,res)=>{
+    if(req.user){
+        res.render('index', {status:'loggedIn', user:req.user})
+        console.log(req.user);
+    }else{
+        res.render('index', {status:'no', user:'nothing'})
+        console.log(req.user);
+    }
 })
 
-router.get('/fillInvoice', (req,res)=>{
-    res.render('fill_invoice')
+router.get('/fillInvoice', loggedIn, (req,res)=>{
+    if(req.user){
+        res.render('fill_invoice', {status:'loggedIn', user:req.user})
+
+    }else{
+        res.render('fill_invoice', {status:'no', user:'nothing'})
+    }
     template = req.query.templateId
     dataCollected = req.body
     console.log(template);
+
 })
 
-router.get('/invoiceGenerated', (req,res)=>{
+router.get('/invoiceGenerated', loggedIn, (req,res)=>{
     console.log(template);
-    res.render(`${template}`)
+    if(req.user){
+        res.render(`${template}`, {status:'loggedIn', user:req.user})
+    }else{
+        res.render(`${template}`, {status:'no', user:'nothing'})
+    }
 })
 
+router.get('/logout', logout)
 
 module.exports = router

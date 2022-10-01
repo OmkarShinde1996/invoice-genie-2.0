@@ -123,7 +123,12 @@ function makeLogoImageObject(){
 }
 
 function makeFromDetailsObject(){
-    let fromText = document.getElementById('from').innerText
+    let fromText
+    if(document.getElementById('from').innerText === ""){
+        fromText = 'From'
+    }else{
+        fromText = document.getElementById('from').innerText
+    }
     fromDetailsObject = {
         fromTitle : `${fromText}`,
         fromName : `${fromName.value}`,
@@ -150,8 +155,102 @@ function makeFromDetailsObject(){
     // console.log(fromDetailsObject)
 }
 
+const form = document.getElementById('form')
+const invoiceNumber1 = document.getElementById('invoice-number-value')
+const invoiceDate1 = document.getElementById('invoice-date-value')
+const fromName1 = document.getElementById('from-name')
+const toName1 = document.getElementById('to-name')
+
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault()
+//     console.log('inside');
+//     validateInputs()
+// })
+
+const setError = (element, message) => {
+    const inputControl = element.parentElement
+    const errorDisplay = inputControl.querySelector('.error')
+    errorDisplay.innerText = message
+    inputControl.classList.add('error')
+    inputControl.classList.remove('success')
+}
+
+const setSuccess = (element)=> {
+    const inputControl = element.parentElement
+    const errorDisplay = inputControl.querySelector('.error')
+    errorDisplay.innerText = ''
+    inputControl.classList.add('success')
+    inputControl.classList.remove('error')
+}
+
+const isValidInvoiceNumber = (invoiceNumber1) => {
+    const reg = /^[a-zA-Z0-9/-]+$/
+    return reg.test(String(invoiceNumber1))
+}
+
+const isValidInvoiceDate = (invoiceDate1) => {
+    const reg = /^[0-9/-]+$/
+    return reg.test(String(invoiceDate1))
+}
+
+const isValidFromName = (fromName1) => {
+    const reg = /^[a-zA-Z.' ]+$/
+    return reg.test(String(fromName1))
+}
+
+const isValidToName = (toName1) => {
+    const reg = /^[a-zA-Z0-9/-]+$/
+    return reg.test(String(toName1))
+}
+
+function validateInputs() {
+    const invoiceNumberValue = invoiceNumber1.value.trim()
+    const invoiceDateValue = invoiceDate1.value.trim()
+    const fromNameValue = fromName1.value.trim()
+    const toNameValue = toName1.value.trim()
+    console.log('validating');
+
+    if(invoiceNumberValue === ''){
+        setError(invoiceNumber1, 'Invoice no. is required')
+    }else if(!isValidInvoiceNumber(invoiceNumberValue)){
+        setError(invoiceNumber1, 'Please enter valid invoice no.')
+        console.log('invlid invoice no.');
+    }else{
+        setSuccess(invoiceNumber1)
+    }
+
+    if(invoiceDateValue === ''){
+        setError(invoiceDate1, 'Invoice date is required')
+    }else if(!isValidInvoiceDate(invoiceDateValue)){
+        setError(invoiceDate1, 'Please enter valid invoice date')
+    }else{
+        setSuccess(invoiceDate1)
+    }
+
+    if(fromNameValue === ''){
+        setError(fromName1, 'Name is required')
+    }else if(!isValidFromName(fromNameValue)){
+        setError(fromName1, 'Please enter valid name')
+    }else{
+        setSuccess(fromName1)
+    }
+
+    if(toNameValue === ''){
+        setError(toName1, 'Name is required')
+    }else if(!isValidToName(toNameValue)){
+        setError(toName1, 'Please enter valid name')
+    }else{
+        setSuccess(toName1)
+    }
+}
+
 function makeToDetailsObject(){
-    let toText = document.getElementById('to').innerText
+    let toText
+    if(document.getElementById('to').innerText === ""){
+        toText = 'From'
+    }else{
+        toText = document.getElementById('to').innerText
+    }
     toDetailsObject = {
         toTitle : `${toText}`,
         toName : `${toName.value}`,
