@@ -342,3 +342,105 @@ function getAllData(){
 
     // .then(res => res.json()).then(data => console.log(data))
 }
+
+const form = document.getElementById('form')
+const invoiceNumber1 = document.getElementById('invoice-number-value')
+const invoiceDate1 = document.getElementById('invoice-date-value')
+const fromName1 = document.getElementById('from-name')
+const toName1 = document.getElementById('to-name')
+
+// form.addEventListener('submit', (e) => {
+//     // e.preventDefault()
+//     // validateInputs()
+//     console.log(validateInputs());
+//     if(validateInputs()){
+//         window.location.href = 'http://localhost:3000/invoiceGenerated'
+//     }else{
+//         e.preventDefault()
+//     }
+// })
+
+const setError = (element, message) => {
+    const inputControl = element.parentElement
+    const errorDisplay = inputControl.querySelector('.error')
+    errorDisplay.innerText = message
+    inputControl.classList.add('error')
+    inputControl.classList.remove('success')
+}
+
+const setSuccess = (element)=> {
+    const inputControl = element.parentElement
+    const errorDisplay = inputControl.querySelector('.error')
+    errorDisplay.innerText = ''
+    inputControl.classList.add('success')
+    inputControl.classList.remove('error')
+}
+
+const isValidInvoiceNumber = (invoiceNumber1) => {
+    const reg = /^[a-zA-Z0-9/-]+$/
+    return reg.test(String(invoiceNumber1))
+}
+
+const isValidInvoiceDate = (invoiceDate1) => {
+    const reg = /^[0-9/-]+$/
+    return reg.test(String(invoiceDate1))
+}
+
+const isValidFromName = (fromName1) => {
+    const reg = /^[a-zA-Z.' ]+$/
+    return reg.test(String(fromName1))
+}
+
+const isValidToName = (toName1) => {
+    const reg = /^[a-zA-Z.' ]+$/
+    return reg.test(String(toName1))
+}
+
+function validateInputs() {
+    const invoiceNumberValue = invoiceNumber1.value.trim()
+    const invoiceDateValue = invoiceDate1.value.trim()
+    const fromNameValue = fromName1.value.trim()
+    const toNameValue = toName1.value.trim()
+    let isValid = true
+
+    if(invoiceNumberValue === ''){
+        setError(invoiceNumber1, 'Invoice no. is required')
+        isValid = false
+    }else if(!isValidInvoiceNumber(invoiceNumberValue)){
+        setError(invoiceNumber1, 'Please enter valid invoice no.')
+        isValid = false
+    }else{
+        setSuccess(invoiceNumber1)
+    }
+
+    if(invoiceDateValue === ''){
+        setError(invoiceDate1, 'Invoice date is required')
+        isValid = false
+    }else if(!isValidInvoiceDate(invoiceDateValue)){
+        setError(invoiceDate1, 'Please enter valid invoice date')
+        isValid = false
+    }else{
+        setSuccess(invoiceDate1)
+    }
+
+    if(fromNameValue === ''){
+        setError(fromName1, 'Name is required')
+        isValid = false
+    }else if(!isValidFromName(fromNameValue)){
+        setError(fromName1, 'Please enter valid name')
+        isValid = false
+    }else{
+        setSuccess(fromName1)
+    }
+
+    if(toNameValue === ''){
+        setError(toName1, 'Name is required')
+        isValid = false
+    }else if(!isValidToName(toNameValue)){
+        setError(toName1, 'Please enter valid name')
+        isValid = false
+    }else{
+        setSuccess(toName1)
+    }
+    return isValid
+}

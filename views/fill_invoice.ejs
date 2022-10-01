@@ -16,6 +16,7 @@
     <%- include('../partials/navbar.ejs');%>
 
     <!-- Home -->
+
     <div class="container-fluid home-section home pb-5" id="home">
         <div class="row row-cols-1 row-cols-lg-2 my-0 mx-4 justify-content-around mt-5 pt-5">
             <div class="col mx-4 column-1">
@@ -38,164 +39,180 @@
     <!-- Create invoice -->
 
     <!-- main container -->
+<form action="/invoiceGenerated" id="form" onsubmit="return validateInputs()">
     <div class="container text-center invoice-form-section">
         <div class="invoice-form">
             <div class="form-container text-center">
-                <form action="#">
-                    <!-- Invoice title -->
-                    <div class="invoice-title-container">
-                        <span contentEditable="true" class="invoice-title">Invoice</span>
-                    </div>
-                    <!-- /Invoice title -->
-                    <!-- Invoice number, date, logo etc -->
-                    <div class="container-fluid home-section" id="home">
-                        <div class="row row-cols-1 row-cols-lg-2 justify-content-around invoice-info-container">
-                            <div class="col">
-                                <div class="invoice-details mx-md-4">
-                                    <div class="invoice-info py-2">
-                                        <div class="invoice-number invoice-info-det"
-                                            id="invoice-number">Invoice No.</div>
-                                        <div class="invoice-number-input"><input type="text" value="A00001"
-                                                id="invoice-number-value" oninput="getRequiredFields()" required></div>
-                                    </div>
-                                    <div class="invoice-info py-2">
-                                        <div class="invoice-date invoice-info-det"
-                                            id="invoice-date">Invoice Date</div>
-                                        <div class="invoice-date-input"><input type="date" id="invoice-date-value" placeholder="Select Data" oninput="getRequiredFields()" required></div>
-                                    </div>
-                                    
-                                    <!-- show when Add Due Date btn clicked -->
-                                    <div class="invoice-info py-2 d-none" id="due-date-div">
-                                        <div class="due-date invoice-info-det" id="due-date">Due Date</div>
-                                        <div class="due-date-input"><input type="date" id="due-date-value"></div>
-                                    </div>
-                                    <!-- show when Add More Fields btn clicked -->
-                                    <div id="invoice-info-details"></div>
-                                    <!-- Buttons -->
-                                    <div class="invoice-info py-2" id="add-due-date-btn">
-                                        <div class="invoice-date invoice-info-det-btn" onclick="showDueDateField()"><i
-                                                class="bi bi-plus-circle-fill pe-2"></i><span>Add Due Date</span></div>
-                                    </div>
-                                    <div class="invoice-info py-2" id="add-more-fields-btn">
-                                        <div class="invoice-date invoice-info-det-btn" onclick="addNewInfoField()"><i
-                                                class="bi bi-plus-circle-fill pe-2"></i><span>Add More Fields</span></div>
-                                        <div class="invoice-date invoice-info-det-btn d-none" id="remove-info-field" onclick="removeLastInfoField()"><i class="bi bi-dash-circle-fill me-2"></i><span>Remove Last Field</span></div>
+                <!-- Invoice title -->
+                <div class="invoice-title-container">
+                    <span contentEditable="true" class="invoice-title">Invoice</span>
+                </div>
+                <!-- /Invoice title -->
+                <!-- Invoice number, date, logo etc -->
+                <div class="container-fluid home-section" id="home">
+                    <div class="row row-cols-1 row-cols-lg-2 justify-content-around invoice-info-container">
+                        <div class="col">
+                            <div class="invoice-details mx-md-4">
+                                <div class="invoice-info py-2">
+                                    <div class="invoice-number invoice-info-det" id="invoice-number">Invoice No.</div>
+                                    <div class="invoice-number-input input-control"><input type="text" value="A00001"
+                                            id="invoice-number-value" oninput="getRequiredFields()" required>
+                                            <div class="error"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col headImage d-flex justify-content-center">
-                                <div class="invoice-logo-container">
-                                    <div class="invoice-logo">
-                                        <img src="../assets/images/image-placeholder1.png" alt="preview-img">
+                                <div class="invoice-info py-2">
+                                    <div class="invoice-date invoice-info-det" id="invoice-date">Invoice Date</div>
+                                    <div class="invoice-date-input input-control"><input type="date" id="invoice-date-value"
+                                            placeholder="Select Data" oninput="getRequiredFields()" required>
+                                            <div class="error"></div>
                                     </div>
-                                    <input type="file" class="file-input" accept="image/*" hidden>
-                                    <div class="btn btn-primary mt-2 logo-btn">Upload logo here<i
+                                </div>
+
+                                <!-- show when Add Due Date btn clicked -->
+                                <div class="invoice-info py-2 d-none" id="due-date-div">
+                                    <div class="due-date invoice-info-det" id="due-date">Due Date</div>
+                                    <div class="due-date-input"><input type="date" id="due-date-value"></div>
+                                </div>
+                                <!-- show when Add More Fields btn clicked -->
+                                <div id="invoice-info-details"></div>
+                                <!-- Buttons -->
+                                <div class="invoice-info py-2" id="add-due-date-btn">
+                                    <div class="invoice-date invoice-info-det-btn" onclick="showDueDateField()"><i
+                                            class="bi bi-plus-circle-fill pe-2"></i><span>Add Due Date</span></div>
+                                </div>
+                                <div class="invoice-info py-2" id="add-more-fields-btn">
+                                    <div class="invoice-date invoice-info-det-btn" onclick="addNewInfoField()"><i
+                                            class="bi bi-plus-circle-fill pe-2"></i><span>Add More Fields</span></div>
+                                    <div class="invoice-date invoice-info-det-btn d-none" id="remove-info-field"
+                                        onclick="removeLastInfoField()"><i
+                                            class="bi bi-dash-circle-fill me-2"></i><span>Remove Last Field</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col headImage d-flex justify-content-center">
+                            <div class="invoice-logo-container">
+                                <div class="invoice-logo">
+                                    <img src="../assets/images/image-placeholder1.png" alt="preview-img">
+                                </div>
+                                <input type="file" class="file-input" accept="image/*" hidden>
+                                <div class="btn btn-primary mt-2 logo-btn">Upload logo here<i
                                         class="bi bi-arrow-up-circle ms-3"></i></div>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /Invoice number, date, logo etc -->
-                    <!-- from to details container -->
-                    <div class="container-fluid home-section" id="home">
-                        <div class="row row-cols-1 row-cols-lg-2 my-0 mx-xs-0 mx-md-2 justify-content-around">
-                            <div class="col from-container gy-3">
-                                <div class="from text-start mx-md-2 py-sm-2">
-                                    <h3 contentEditable="true" id="from">From</h3>
-                                    <div class="from-details pt-2">
+                </div>
+                <!-- /Invoice number, date, logo etc -->
+                <!-- from to details container -->
+                <div class="container-fluid home-section" id="home">
+                    <div class="row row-cols-1 row-cols-lg-2 my-0 mx-xs-0 mx-md-2 justify-content-around">
+                        <div class="col from-container gy-3">
+                            <div class="from text-start mx-md-2 py-sm-2">
+                                <h3 contentEditable="true" id="from">From</h3>
+                                <div class="from-details pt-2">
+                                    <div class="input-control">
                                         <input type="text" value="" placeholder="Your name or Your business name"
-                                            id="from-name" oninput="getRequiredFields()" required>
-                                        <input type="text" value="" placeholder="Address" id="from-address">
-                                        <input type="text" value="" placeholder="Country" id="from-country">
-                                        <div class="city">
-                                            <input class="me-4" type="text" value="" placeholder="City" id="from-city">
-                                            <input type="text" value="" placeholder="Zip" id="from-zip">
-                                        </div>
-                                        <input type="text" value="" placeholder="State" id="from-state">
-                                        <!-- Email & Phone no. show when btn clicked -->
-                                        <input class="d-none" type="email" value="" placeholder="Email Id"
-                                            id="from-email">
-                                        <input class="d-none" type="number" value="" placeholder="Phone Number"
-                                            id="from-mobile">
-                                        <!-- GST & PAN fields show when btn clicked -->
-                                        <input class="d-none" type="text" value="" placeholder="GST No." id="from-gst">
-                                        <input class="d-none" type="text" value="" placeholder="PAN No." id="from-pan">
-                                        <!-- New field show when btn clicked -->
-                                        <div id="add-new-from-field">
-                                            <input class="d-none" type="text" value="" placeholder="Text"
-                                                id="from-text">
-                                        </div>
-                                        <div class="buttons">
-                                            <div class="email-btn invoice-info-det-btn">
-                                                <i class="bi bi-envelope-fill pe-2"></i><span id="from-add-email" onclick="showFromEmailField()">Add Email Id</span>
-                                            </div>
-                                            <div class="phone-btn invoice-info-det-btn">
-                                                <i class="bi bi-telephone-fill pe-2"></i><span id="from-add-phone" onclick="showFromPhoneField()">Add Phone Number</span>
-                                            </div>
-                                        </div>
-                                        <div class="buttons pb-3">
-                                            <div class="email-btn invoice-info-det-btn">
-                                                <i class="bi bi-plus-circle-fill pe-2"></i><span id="from-add-gst" onclick="showFromGstField()">Add GST No.</span>
-                                            </div>
-                                            <div class="phone-btn invoice-info-det-btn">
-                                                <i class="bi bi-plus-circle-fill pe-2"></i><span id="from-add-pan" onclick="showFromPanField()">Add PAN No.</span>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="custom-field text-center" id="from-add-custom-fields">
-                                            <i class="bi bi-plus-circle-fill pe-2"></i><span>Add Custom Fields</span>
-                                        </div> -->
+                                        id="from-name" oninput="getRequiredFields()" required>
+                                        <div class="error ms-3"></div>
                                     </div>
+                                    <input type="text" value="" placeholder="Address" id="from-address">
+                                    <input type="text" value="" placeholder="Country" id="from-country">
+                                    <div class="city">
+                                        <input class="me-4" type="text" value="" placeholder="City" id="from-city">
+                                        <input type="text" value="" placeholder="Zip" id="from-zip">
+                                    </div>
+                                    <input type="text" value="" placeholder="State" id="from-state">
+                                    <!-- Email & Phone no. show when btn clicked -->
+                                    <input class="d-none" type="email" value="" placeholder="Email Id" id="from-email">
+                                    <input class="d-none" type="number" value="" placeholder="Phone Number"
+                                        id="from-mobile">
+                                    <!-- GST & PAN fields show when btn clicked -->
+                                    <input class="d-none" type="text" value="" placeholder="GST No." id="from-gst">
+                                    <input class="d-none" type="text" value="" placeholder="PAN No." id="from-pan">
+                                    <!-- New field show when btn clicked -->
+                                    <div id="add-new-from-field">
+                                        <input class="d-none" type="text" value="" placeholder="Text" id="from-text">
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="email-btn invoice-info-det-btn">
+                                            <i class="bi bi-envelope-fill pe-2"></i><span id="from-add-email"
+                                                onclick="showFromEmailField()">Add Email Id</span>
+                                        </div>
+                                        <div class="phone-btn invoice-info-det-btn">
+                                            <i class="bi bi-telephone-fill pe-2"></i><span id="from-add-phone"
+                                                onclick="showFromPhoneField()">Add Phone Number</span>
+                                        </div>
+                                    </div>
+                                    <div class="buttons pb-3">
+                                        <div class="email-btn invoice-info-det-btn">
+                                            <i class="bi bi-plus-circle-fill pe-2"></i><span id="from-add-gst"
+                                                onclick="showFromGstField()">Add GST No.</span>
+                                        </div>
+                                        <div class="phone-btn invoice-info-det-btn">
+                                            <i class="bi bi-plus-circle-fill pe-2"></i><span id="from-add-pan"
+                                                onclick="showFromPanField()">Add PAN No.</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="custom-field text-center" id="from-add-custom-fields">
+                                                <i class="bi bi-plus-circle-fill pe-2"></i><span>Add Custom Fields</span>
+                                            </div> -->
                                 </div>
                             </div>
-                            <div class="col to-container gy-3">
-                                <div class="to text-start mx-md-2 py-sm-2">
-                                    <h3 contentEditable="true" id="to">To</h3>
-                                    <div class="to-details pt-2">
+                        </div>
+                        <div class="col to-container gy-3">
+                            <div class="to text-start mx-md-2 py-sm-2">
+                                <h3 contentEditable="true" id="to">To</h3>
+                                <div class="to-details pt-2">
+                                    <div class="input-control">
                                         <input type="text" value="" placeholder="Client's name or Client's business name"
-                                            id="to-name" oninput="getRequiredFields()" required>
-                                        <input type="text" value="" placeholder="Address" id="to-address">
-                                        <input type="text" value="" placeholder="Country" id="to-country">
-                                        <div class="city">
-                                            <input class="me-4" type="text" value="" placeholder="City" id="to-city">
-                                            <input type="text" value="" placeholder="Zip code" id="to-zip">
-                                        </div>
-                                        <input type="text" value="" placeholder="State" id="to-state">
-                                        <!-- Email & Phone no. show when btn clicked -->
-                                        <input class="d-none" type="email" value="" placeholder="Email Id"
-                                            id="to-email">
-                                        <input class="d-none" type="number" value="" placeholder="Phone Number"
-                                            id="to-mobile">
-                                        <!-- GST & PAN fields show when btn clicked -->
-                                        <input class="d-none" type="text" value="" placeholder="GST No." id="to-gst">
-                                        <input class="d-none" type="text" value="" placeholder="PAN No." id="to-pan">
-                                        <!-- New field show when btn clicked -->
-                                        <div id="add-new-to-field">
-                                            <input class="d-none" type="text" value="" placeholder="Text" id="to-text">
-                                        </div>
-                                        <div class="buttons">
-                                            <div class="email-btn invoice-info-det-btn" onclick="">
-                                                <i class="bi bi-envelope-fill pe-2"></i><span id="to-add-email" onclick="showToEmailField()">Add Email Id</span>
-                                            </div>
-                                            <div class="phone-btn invoice-info-det-btn">
-                                                <i class="bi bi-telephone-fill pe-2"></i><span id="to-add-phone" onclick="showToPhoneField()">Add Phone Number</span>
-                                            </div>
-                                        </div>
-                                        <div class="buttons pb-3">
-                                            <div class="email-btn invoice-info-det-btn">
-                                                <i class="bi bi-plus-circle-fill pe-2"></i><span id="to-add-gst" onclick="showToGstField()">Add GST No.</span>
-                                            </div>
-                                            <div class="phone-btn invoice-info-det-btn">
-                                                <i class="bi bi-plus-circle-fill pe-2"></i><span id="to-add-pan" onclick="showToPanField()">Add PAN No.</span>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="custom-field text-center" id="to-add-custom-fields">
-                                            <i class="bi bi-plus-circle-fill pe-2"></i><span>Add Custom Fields</span>
-                                        </div> -->
+                                        id="to-name" oninput="getRequiredFields()" required>
+                                        <div class="error ms-3"></div>
                                     </div>
+                                    <input type="text" value="" placeholder="Address" id="to-address">
+                                    <input type="text" value="" placeholder="Country" id="to-country">
+                                    <div class="city">
+                                        <input class="me-4" type="text" value="" placeholder="City" id="to-city">
+                                        <input type="text" value="" placeholder="Zip code" id="to-zip">
+                                    </div>
+                                    <input type="text" value="" placeholder="State" id="to-state">
+                                    <!-- Email & Phone no. show when btn clicked -->
+                                    <input class="d-none" type="email" value="" placeholder="Email Id" id="to-email">
+                                    <input class="d-none" type="number" value="" placeholder="Phone Number"
+                                        id="to-mobile">
+                                    <!-- GST & PAN fields show when btn clicked -->
+                                    <input class="d-none" type="text" value="" placeholder="GST No." id="to-gst">
+                                    <input class="d-none" type="text" value="" placeholder="PAN No." id="to-pan">
+                                    <!-- New field show when btn clicked -->
+                                    <div id="add-new-to-field">
+                                        <input class="d-none" type="text" value="" placeholder="Text" id="to-text">
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="email-btn invoice-info-det-btn" onclick="">
+                                            <i class="bi bi-envelope-fill pe-2"></i><span id="to-add-email"
+                                                onclick="showToEmailField()">Add Email Id</span>
+                                        </div>
+                                        <div class="phone-btn invoice-info-det-btn">
+                                            <i class="bi bi-telephone-fill pe-2"></i><span id="to-add-phone"
+                                                onclick="showToPhoneField()">Add Phone Number</span>
+                                        </div>
+                                    </div>
+                                    <div class="buttons pb-3">
+                                        <div class="email-btn invoice-info-det-btn">
+                                            <i class="bi bi-plus-circle-fill pe-2"></i><span id="to-add-gst"
+                                                onclick="showToGstField()">Add GST No.</span>
+                                        </div>
+                                        <div class="phone-btn invoice-info-det-btn">
+                                            <i class="bi bi-plus-circle-fill pe-2"></i><span id="to-add-pan"
+                                                onclick="showToPanField()">Add PAN No.</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="custom-field text-center" id="to-add-custom-fields">
+                                                <i class="bi bi-plus-circle-fill pe-2"></i><span>Add Custom Fields</span>
+                                            </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
             <!-- /from to details container -->
             <!-- Options for columns in table -->
@@ -203,8 +220,8 @@
                 <div class="row column-options justify-content-center gy-3">
                     <div class="col-12 col-sm-4 col-md-4">
                         <div class="set-tax">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                id="set-tax" onchange="taxAllinOne()">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="set-tax"
+                                onchange="taxAllinOne()">
                                 <option value="0" selected>Set Tax</option>
                                 <option value="1">GST</option>
                                 <option value="2">VAT</option>
@@ -222,7 +239,7 @@
                                 <option selected>Select Currancy</option>
                                 <option value="1">--Comming Soon--</option>
                                 <!-- <option value="2">Two</option>
-                                <option value="3">Three</option> -->
+                                    <option value="3">Three</option> -->
                             </select>
                         </div>
                     </div>
@@ -255,7 +272,7 @@
                         </tr>
                     </thead>
                     <tbody class="table-row">
-                       
+
                     </tbody>
                 </table>
 
@@ -296,7 +313,8 @@
             <div class="container-fluid total-invoice-con home-section">
                 <div class="row row-cols-1 row-cols-lg-2 my-0 mx-xs-0 mx-md-2 justify-content-between">
                     <div class="col invoice-notes-container gy-3">
-                        <div class="custom-field-container text-center my-2" id="add-bank-details" onclick="showBankDetails()">
+                        <div class="custom-field-container text-center my-2" id="add-bank-details"
+                            onclick="showBankDetails()">
                             <i class="bi bi-plus-circle-fill pe-2"></i><span>Add Bank Details</span>
                         </div>
                         <!-- Bank details -->
@@ -321,7 +339,8 @@
                                 <div class="invoice-info py-2">
                                     <div class="account-type bank-info-det">Account Type</div>
                                     <div class="account-type-input"><input type="text" value="Savings"
-                                            id="account-type"></div>
+                                            id="account-type">
+                                    </div>
                                 </div>
                                 <div class="invoice-info py-2">
                                     <div class="bank-name bank-info-det">Bank Name</div>
@@ -336,34 +355,37 @@
                             </div>
                         </div>
                         <!-- Terms and conditions -->
-                        <div class="custom-field-container text-center my-2" id="add-terms-conditions" onclick="showTermsConditions()">
+                        <div class="custom-field-container text-center my-2" id="add-terms-conditions"
+                            onclick="showTermsConditions()">
                             <i class="bi bi-plus-circle-fill pe-2"></i><span>Add Terms & Conditions</span>
                         </div>
                         <div class="terms-con text-start d-none" id="terms-con">
                             <h3 class="pb-2" id="terms">Terms & Conditions</h3>
                             <!-- <div class="conditions" contentEditable="true" id="terms-conditions">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae blanditiis quas eius,
-                                    voluptate.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae blanditiis quas eius,
-                                    voluptate.</p>
-                            </div> -->
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae blanditiis quas eius,
+                                        voluptate.</p>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae blanditiis quas eius,
+                                        voluptate.</p>
+                                </div> -->
                             <textarea name="terms_conditions" id="terms-conditions" cols="30" rows="10"></textarea>
                         </div>
                         <!-- Additional notes -->
-                        <div class="custom-field-container text-center my-2" id="add-additional-notes" onclick="showAdditionalNotes()">
+                        <div class="custom-field-container text-center my-2" id="add-additional-notes"
+                            onclick="showAdditionalNotes()">
                             <i class="bi bi-plus-circle-fill pe-2"></i><span>Add Additional Notes</span>
                         </div>
                         <div class="additional-notes-con text-start d-none" id="additional-notes-con">
                             <h3 class="pb-2" contentEditable="true" id="additional-notes">Additional Notes</h3>
                             <!-- <p contentEditable="true" id="tersm-and-conditions">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae blanditiis quas eius,
-                                voluptate, obcaecati expedita dolor at esse modi nemo quaerat aliquam sint soluta.
-                                Placeat officia eligendi atque incidunt nam?</p> -->
-                            <textarea name="additional-notes" id="additional-notes-text-area" cols="30" rows="10"></textarea>
+                                    voluptate, obcaecati expedita dolor at esse modi nemo quaerat aliquam sint soluta.
+                                    Placeat officia eligendi atque incidunt nam?</p> -->
+                            <textarea name="additional-notes" id="additional-notes-text-area" cols="30"
+                                rows="10"></textarea>
                         </div>
                     </div>
                     <div class="col total-amount-container gy-3">
                         <div class="total-tax-container text-center pb-3">
-                           
+
                         </div>
                         <!-- sub total container -->
                         <div class="sub-total-container text-center pb-3">
@@ -371,8 +393,7 @@
                                 <h3 id="sub-total-text">Sub Total</h3>
                             </div>
                             <div class="sub-total-amount">
-                                <span class="h4">&#8377;<span
-                                        id="sub-total-amount">0</span></span>
+                                <span class="h4">&#8377;<span id="sub-total-amount">0</span></span>
                             </div>
                         </div>
                         <!-- discount container -->
@@ -385,7 +406,8 @@
                                         id="discount-amount" value="0" oninput="calculateSubTotal()"></input></span>
                             </div>
                         </div>
-                        <div class="custom-field-container text-center" id="discount-on-total" onclick="showDiscountDiv()">
+                        <div class="custom-field-container text-center" id="discount-on-total"
+                            onclick="showDiscountDiv()">
                             <i class="bi bi-plus-circle-fill pe-2"></i><span>Give Discount</span>
                         </div>
                         <hr>
@@ -395,8 +417,7 @@
                                 <h3 id="total">Total</h3>
                             </div>
                             <div class="total-amount">
-                                <span class="h4">&#8377;<span
-                                        id="total-amount">0</span></span>
+                                <span class="h4">&#8377;<span id="total-amount">0</span></span>
                             </div>
                         </div>
                         <hr>
@@ -406,13 +427,13 @@
             <!-- /total and invoice notes container -->
             <!-- Save and continue button -->
             <div class="container save-and-continue-con py-3">
-                <a href="/invoiceGenerated" class="btn btn-primary mx-4" role="button" id="save-btn" tabindex="-1" aria-disabled="true" onclick="allInOnePack()">Save & Continue</a>
+                <input class="btn btn-primary mx-4" role="button" id="save-btn" tabindex="-1"
+                    aria-disabled="true" onclick="allInOnePack()" type="submit" value="Save & Continue">
             </div>
             <!-- Save and continue button -->
-            </form>
         </div>
     </div>
-    </div>
+</form>
     <!-- /main container -->
 
     <!-- try button -->
