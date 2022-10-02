@@ -3,6 +3,8 @@ if(process.env.NODE_ENV !== 'production'){
 }
 
 const express = require('express')
+const path = require('path')
+const fileUpload = require('express-fileupload')
 const ejs = require('ejs')
 const db = require('./routes/db-config')
 const bcrypt = require('bcryptjs')
@@ -19,6 +21,7 @@ app.set('view engine','ejs')
 app.use(express.static('public'))
 app.use(cookie())
 app.use(express.json())
+app.use(fileUpload())
 
 db.connect((err) => {
     if(err) throw err
