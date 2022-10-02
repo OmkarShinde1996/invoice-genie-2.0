@@ -314,3 +314,69 @@ hr{
         right: unset;
     }
 }
+
+/* *************************************************************** */
+.success_toast{
+    background-color: #D1E7DD;
+    padding: 10px;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+
+.success_toast .progress{
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: #D1E7DD;
+}
+
+.progress.active:before{
+    animation: progress 8s linear forwards
+}
+
+@keyframes progress{
+    100%{
+        width: 0;
+    }
+}
+
+.success_toast .progress:before{
+    content: '';
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #157347;
+}
+
+.error_toast{
+    background-color: #F8D7DA;
+    padding: 10px;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.error_toast .progress{
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: #F8D7DA;
+}
+
+.error_toast .progress:before{
+    content: '';
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #BB2D3B;
+}
+
+#toast_con{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -262,3 +262,8 @@ hr{
 #check{
     color: #407BFF;
 }
+
+.success_toast{
+    background-color: #D1E7DD;
+    padding: 10px;
+}

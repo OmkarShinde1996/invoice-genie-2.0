@@ -339,8 +339,6 @@ function getAllData(){
             'content-type': 'application/json'
         }
     }).then(res => res.json()).then(data => console.log(data))
-
-    // .then(res => res.json()).then(data => console.log(data))
 }
 
 const form = document.getElementById('form')
@@ -349,16 +347,6 @@ const invoiceDate1 = document.getElementById('invoice-date-value')
 const fromName1 = document.getElementById('from-name')
 const toName1 = document.getElementById('to-name')
 
-// form.addEventListener('submit', (e) => {
-//     // e.preventDefault()
-//     // validateInputs()
-//     console.log(validateInputs());
-//     if(validateInputs()){
-//         window.location.href = 'http://localhost:3000/invoiceGenerated'
-//     }else{
-//         e.preventDefault()
-//     }
-// })
 
 const setError = (element, message) => {
     const inputControl = element.parentElement

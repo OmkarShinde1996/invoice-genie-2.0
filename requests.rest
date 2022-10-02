@@ -22,10 +22,11 @@ GET http://localhost:3000/api/validateJson
 
 ###
 
-POST http://localhost:3000/api/validateJson
+POST http://localhost:3000/api/saveData
 Content-Type: application/json
 
 {
+  "username": "omkar",
   "additionalNotesObject": {},
   "invoiceDetailsObject": { "Invoice No.": "A0001", "Invoice Date": "2022-02-12" },
   "termsAndConditionsObject": {},
@@ -61,7 +62,7 @@ Content-Type: application/json
   "bankDetailsObject": {},
   "fromDetailsObject": {
     "fromTitle": "From",
-    "fromName": "omkar tours.'",
+    "fromName": "omkar tours",
     "fromAddress": "shivprerna chwal, maharashtra nagar,",
     "fromCity": "Mumbai",
     "fromState": "Maharashtra",

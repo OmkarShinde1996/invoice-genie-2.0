@@ -40,6 +40,7 @@ router.get('/invoiceGenerated', loggedIn, (req,res)=>{
     }
 })
 
+
 router.get('/logout', logout)
 
 module.exports = router
