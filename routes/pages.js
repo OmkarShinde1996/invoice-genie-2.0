@@ -3,6 +3,7 @@ const router = express.Router()
 const loggedIn = require('../controllers/loggedin')
 const logout = require('../controllers/logout')
 
+
 // const validateJson = require('../controllers/validateJson')
 
 let template = ""
@@ -38,6 +39,15 @@ router.get('/invoiceGenerated', loggedIn, (req,res)=>{
     }else{
         res.render(`${template}`, {status:'no', user:'nothing'})
     }
+})
+
+router.get('/myInvoices', loggedIn, (req,res) => {
+    if(req.user){
+        res.render('myInvoices', {status:'loggedIn', user:req.user})
+    }else{
+        res.render('myInvoices', {status:'no', user:'nothing'})
+    }
+    
 })
 
 
