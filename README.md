@@ -13,3 +13,5 @@ Doing this to learn node js to develop backends for my future projects. :smiley:
 `01-10-2022` Added Register, Login and logout functionality to the app with proper authentication and authorization using JWT token, Bcrypt to encrypt passwords.
 
 `02-10-2022` Added functionality to save invoice in database. This functionaly only works when user is logged in or else app will show littel alert saying "You must login before saving your invoice". and after successful saving also app will show alert saying "Your invoice saved successfuly!" :sunglasses:
+
+`03-10-2022` Created an API to send invoice data to show on MyInvoices page and added MyInvoices page.
