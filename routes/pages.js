@@ -7,7 +7,6 @@ const logout = require('../controllers/logout')
 // const validateJson = require('../controllers/validateJson')
 
 let template = ""
-let dataCollected
 
 router.get('/', loggedIn, (req,res)=>{
     if(req.user){
@@ -27,7 +26,6 @@ router.get('/fillInvoice', loggedIn, (req,res)=>{
         res.render('fill_invoice', {status:'no', user:'nothing'})
     }
     template = req.query.templateId
-    dataCollected = req.body
     console.log(template);
 
 })
@@ -53,4 +51,4 @@ router.get('/myInvoices', loggedIn, (req,res) => {
 
 router.get('/logout', logout)
 
-module.exports = router
+module.exports = {router, template}
