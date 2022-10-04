@@ -16,4 +16,4 @@ Doing this to learn node js to develop backends for my future projects. :smiley:
 
 `03-10-2022` Created an API to send invoice data to show on MyInvoices page and added MyInvoices page.
 
-`04-10-2022` Now redirecting thuser to Home Page if user logout on MyInvoices page.
+`04-10-2022` Now redirecting the user to Home Page if user logout on MyInvoices page.
