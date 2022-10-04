@@ -1,9 +1,9 @@
 const express = require('express')
 const validate = require('./validateJson')
+const saveDataToDB = require('./addInvoice')
+const showInvoices = require('./showInvoices')
 const validateJson = validate.validateJson
 const getData = validate.getData
-const saveDataToDB = validate.saveDataToDB
-const showInvoices = validate.showInvoices
 const loggedIn = require('./loggedin')
 const router = express.Router()
 

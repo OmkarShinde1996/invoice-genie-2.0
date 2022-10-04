@@ -28,7 +28,7 @@ db.connect((err) => {
     console.log('DB Connected!');
 })
 
-app.use('/', require('./routes/pages'))
+app.use('/', require('./routes/pages').router)
 app.use('/api', require('./controllers/validate'))
 app.use('/api', require('./controllers/auth'))
 
