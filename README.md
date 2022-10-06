@@ -19,3 +19,5 @@ Doing this to learn node js to develop backends for my future projects. :smiley:
 `04-10-2022` Now redirecting the user to Home Page if user logout on MyInvoices page.
 
 `05-10-2022` Added getInvoiceDetails and deleteInvoice APIs and connected it to MyInvoices page from where user can veiw and delete invoice from database.
+
+`06-10-2022` Working on building logic to edit invoices which are already saved into the database. Today, implemented new page to edit the invoice and fetching saved data from DB on this page.
