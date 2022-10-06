@@ -1,5 +1,4 @@
 const db = require('../routes/db-config')
-// const template = require('../routes/pages').template
 
 const saveDataToDB = async(req, res) => {
     console.log(req.user);
@@ -15,6 +14,7 @@ const saveDataToDB = async(req, res) => {
             return res.json({status:'error', error:'You are not a registered user. Please Sign up first'})
         }else{
             var uniqueInvoiceNumber = Date.now().toString()
+            var template = req.body.template
             var additionalNotesObject = req.body.additionalNotesObject
             var invoiceDetailsObject = req.body.invoiceDetailsObject
             var termsAndConditionsObject = req.body.termsAndConditionsObject
@@ -43,9 +43,7 @@ const saveDataToDB = async(req, res) => {
                 return res.status(400).json({status:'error', error:`Please provide proper inputs.`})
             }
             else{
-                // console.log(template);
-                // return res.status(201).json({ status: 'success', success: 'Invoice saved successfuly!' })
-                db.query('INSERT INTO invoice_info SET ?', {username:username, uniqueInvoiceNumber:uniqueInvoiceNumber, additionalNotesObject:JSON.stringify(additionalNotesObject),invoiceDetailsObject:JSON.stringify(invoiceDetailsObject),termsAndConditionsObject:JSON.stringify(termsAndConditionsObject),tableArray:JSON.stringify(tableArray),actualInvoiceText:JSON.stringify(actualInvoiceText),invoiceMoreDetailsObject:JSON.stringify(invoiceMoreDetailsObject),toDetailsObject:JSON.stringify(toDetailsObject),logoImageUrl:JSON.stringify(logoImageUrl),totalTaxObject:JSON.stringify(totalTaxObject),bankDetailsObject:JSON.stringify(bankDetailsObject),fromDetailsObject:JSON.stringify(fromDetailsObject)}, (error,results) => {
+                db.query('INSERT INTO invoice_info SET ?', {username:username, templateId:template, uniqueInvoiceNumber:uniqueInvoiceNumber, additionalNotesObject:JSON.stringify(additionalNotesObject),invoiceDetailsObject:JSON.stringify(invoiceDetailsObject),termsAndConditionsObject:JSON.stringify(termsAndConditionsObject),tableArray:JSON.stringify(tableArray),actualInvoiceText:JSON.stringify(actualInvoiceText),invoiceMoreDetailsObject:JSON.stringify(invoiceMoreDetailsObject),toDetailsObject:JSON.stringify(toDetailsObject),logoImageUrl:JSON.stringify(logoImageUrl),totalTaxObject:JSON.stringify(totalTaxObject),bankDetailsObject:JSON.stringify(bankDetailsObject),fromDetailsObject:JSON.stringify(fromDetailsObject)}, (error,results) => {
                     if(error)throw error
                     return res.status(201).json({ status: 'success', success: 'Invoice saved successfuly!' })
                 })
