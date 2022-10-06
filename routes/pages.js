@@ -4,8 +4,6 @@ const loggedIn = require('../controllers/loggedin')
 const logout = require('../controllers/logout')
 
 
-// const validateJson = require('../controllers/validateJson')
-
 let template = ""
 
 router.get('/', loggedIn, (req,res)=>{
@@ -45,9 +43,16 @@ router.get('/myInvoices', loggedIn, (req,res) => {
     }else{
         res.render('myInvoices', {status:'no', user:'nothing'})
     }
-    
 })
 
+router.get('/viewInvoice', loggedIn, (req,res) => {
+
+    if(req.user){
+        res.render('viewInvoice', {status:'loggedIn', user:req.user, template:req.query.templateId})
+    }else{
+        res.render('viewInvoice', {status:'no', user:'nothing'})
+    }
+})
 
 router.get('/logout', logout)
 

@@ -1,9 +1,11 @@
 const db = require('../routes/db-config')
 let getDataOnDemand
-let template
+let template = ""
 const validateJson = async(req,res) =>{
     template = req.query.templateId
     const dataBody = {
+        uniqueInvoiceNumber = Date.now().toString(),
+        template = req.body.template,
         additionalNotesObject,
         invoiceDetailsObject,
         termsAndConditionsObject,
@@ -40,4 +42,5 @@ const getData = async(req,res) =>{
 }
 
 
-module.exports = {validateJson,getData, template}
+
+module.exports = {validateJson,getData}

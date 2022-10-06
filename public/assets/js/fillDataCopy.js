@@ -31,27 +31,61 @@ let fillAccType = document.getElementById('acc-type')
 let fillBankName = document.getElementById('bank-name')
 let fillUpiId = document.getElementById('upi-id')
 
-const template_deSerialize = localStorage.getItem('template')
-const actualInvoiceText_deSerialize = localStorage.getItem('actualInvoiceText')
-const invoiceDetailsObject_deSerialize = JSON.parse(localStorage.getItem('invoiceDetailsObject'))
-const invoiceMoreDetailsObject_deSerialize = JSON.parse(localStorage.getItem('invoiceMoreDetailsObject'))
-const logoImageUrl_deSerialize = JSON.parse(localStorage.getItem('logoImageUrl'))
-const fromDetailsObject_deSerialize = JSON.parse(localStorage.getItem('fromDetailsObject'))
-const toDetailsObject_deSerialize = JSON.parse(localStorage.getItem('toDetailsObject'))
-const totalTaxObject_deSerialize = JSON.parse(localStorage.getItem('totalTaxObject'))
-const bankDetailsObject_deSerialize = JSON.parse(localStorage.getItem('bankDetailsObject'))
-const termsAndConditionsObject_deSerialize = JSON.parse(localStorage.getItem('termsAndConditionsObject'))
-const additionalNotesObject_deSerialize = JSON.parse(localStorage.getItem('additionalNotesObject'))
-const tableArray_deSerialize = JSON.parse(localStorage.getItem('tableArray'))
+
+let template_deSerialize
+let actualInvoiceText_deSerialize
+let invoiceDetailsObject_deSerialize
+let invoiceMoreDetailsObject_deSerialize
+let logoImageUrl_deSerialize
+let fromDetailsObject_deSerialize
+let toDetailsObject_deSerialize
+let totalTaxObject_deSerialize
+let bankDetailsObject_deSerialize
+let termsAndConditionsObject_deSerialize
+let additionalNotesObject_deSerialize
+let tableArray_deSerialize
 
 
+const getDataFromDB = () => {
+    // console.log(receivedDataObject);
+    const uniqueInvoiceId = {
+        InvoiceUniqueId: sessionStorage.getItem('selectedInvoiceUniqueId')
+    }
+    fetch('/api/getInvoiceData', {
+        method: 'POST',
+        body: JSON.stringify(uniqueInvoiceId),
+        headers:{
+            'content-type': 'application/json'
+        }
+    }).then(resp => resp.json())
+    .then(data => {
+        if(data.status == 'error'){
+            console.log(data.error)
+        }else{
+            console.log(data.success)
+            template_deSerialize = data.success.templateId
+            actualInvoiceText_deSerialize = JSON.parse(data.success.actualInvoiceText)
+            invoiceDetailsObject_deSerialize = JSON.parse(data.success.invoiceDetailsObject)
+            invoiceMoreDetailsObject_deSerialize = JSON.parse(data.success.invoiceMoreDetailsObject)
+            logoImageUrl_deSerialize = JSON.parse(data.success.logoImageUrl)
+            fromDetailsObject_deSerialize = JSON.parse(data.success.fromDetailsObject)
+            toDetailsObject_deSerialize = JSON.parse(data.success.toDetailsObject)
+            totalTaxObject_deSerialize = JSON.parse(data.success.totalTaxObject)
+            bankDetailsObject_deSerialize = JSON.parse(data.success.bankDetailsObject)
+            termsAndConditionsObject_deSerialize = JSON.parse(data.success.termsAndConditionsObject)
+            additionalNotesObject_deSerialize = JSON.parse(data.success.additionalNotesObject)
+            tableArray_deSerialize = JSON.parse(data.success.tableArray)
+        }
+    })
+}
+
+getDataFromDB()
 window.onload = function fillInvoice(){
     let amountInDecimal = totalTaxObject_deSerialize.Total.split('; ')
     let amountArray = amountInDecimal[1].split('.')
     let actualAmount = Number(amountArray[0])
     numberToWord(actualAmount)
     //Setting up the Invoice text
-    // console.log(actualInvoiceText_deSerialize)
     fillInvoiceTitle.innerText = actualInvoiceText_deSerialize
     //Setting up the logo url, if not present then hiding logo container
     if(Object.keys(logoImageUrl_deSerialize).length == 0){
@@ -239,15 +273,6 @@ window.onload = function fillInvoice(){
     }
     fillTotalDueAmt.innerHTML = totalTaxObject_deSerialize["Total"]
 
-    //Setting visibility for footer container
-    // if(Object.keys(termsAndConditionsObject_deSerialize).length == 0 &&
-    // Object.keys(bankDetailsObject_deSerialize).length == 0
-    // ){
-    //     termsBankCon.classList.add('d-none')
-    // }else{
-    //     termsBankCon.classList.remove('d-none')
-    // }
-
     //Setting up terms & conditions values
     if(Object.keys(termsAndConditionsObject_deSerialize).length != 0){
         fillTermsCoditionsCon.classList.remove('d-none')
@@ -330,67 +355,6 @@ window.onload = function fillInvoice(){
         tableBody.appendChild(tr)
         
     }
-    // console.log(tableBody)
-
-    // save_btn.classList.remove('disabled')
-    // save_btn.removeAttribute('tabindex')
 }
 
 
-
-const saveInvoiceButton = document.getElementById('save-btn')
-
-saveInvoiceButton.addEventListener('click', ()=>{
-    const invoice_data = {
-        template:template_deSerialize,
-        additionalNotesObject:additionalNotesObject_deSerialize,
-        invoiceDetailsObject:invoiceDetailsObject_deSerialize,
-        termsAndConditionsObject:termsAndConditionsObject_deSerialize,
-        tableArray:tableArray_deSerialize,
-        actualInvoiceText:actualInvoiceText_deSerialize,
-        invoiceMoreDetailsObject:invoiceMoreDetailsObject_deSerialize,
-        toDetailsObject:toDetailsObject_deSerialize,
-        logoImageUrl:logoImageUrl_deSerialize,
-        totalTaxObject:totalTaxObject_deSerialize,
-        bankDetailsObject:bankDetailsObject_deSerialize,
-        fromDetailsObject:fromDetailsObject_deSerialize,
-    }
-    fetch('/api/saveData', {
-        method: 'POST',
-        body: JSON.stringify(invoice_data),
-        headers:{
-            'content-type': 'application/json'
-        }
-    }).then(res => res.json())
-    .then(data => {
-        if(data.status == 'error'){
-            view_toast(error_toast,failed_progress_bar)
-            // success.style.display = 'none'
-            // error.style.display = 'block'
-            toast_text2.innerText = data.error
-        }else{
-            view_toast(success_toast,success_progress_bar)
-            // error.style.display = 'none'
-            // success.style.display = 'block'
-            toast_text1.innerText = data.success
-            save_btn.classList.add('disabled')
-            save_btn.setAttribute('tabindex','-1')
-        }
-    })
-})
-
-let success_toast = document.querySelector('.success_toast')
-let error_toast = document.querySelector('.error_toast')
-let success_progress_bar = document.getElementById('success_progress')
-let failed_progress_bar = document.getElementById('failed_progress')
-let save_btn = document.getElementById('save-btn')
-
-const view_toast = (toast_type, toast_progress) =>{
-    toast_type.classList.remove('d-none')
-    toast_progress.classList.add('active')
-
-    setTimeout(() =>{
-        toast_type.classList.add('d-none')
-        // toast_type.classList.remove('active')
-    }, 7000)
-}

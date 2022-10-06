@@ -56,3 +56,11 @@ body{
 .custom-tooltip {
     --bs-tooltip-bg: var(--bs-primary);
 }
+
+button, input, optgroup, select, textarea{
+    margin: 2px;
+}
+
+td{
+    vertical-align: middle !important;
+}

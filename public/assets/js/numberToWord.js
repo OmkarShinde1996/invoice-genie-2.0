@@ -1,12 +1,10 @@
 let wordContainer = document.getElementById('number-to-word')
 
-let amountInDecimal = totalTaxObject_deSerialize.Total.split('; ')
-let amountArray = amountInDecimal[1].split('.')
-let actualAmount = Number(amountArray[0])
 
 
-function numberToWord(){
-    wordContainer.innerText = NumInWords(actualAmount)
+
+function numberToWord(convertableAmount){
+    wordContainer.innerText = NumInWords(convertableAmount)
 }
 
 

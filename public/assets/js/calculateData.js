@@ -286,6 +286,8 @@ function getRequiredFields(){
 
 
 function storeDataInSessionStorage(){
+    const params = new URLSearchParams(window.location.search)
+    const template = params.get('templateId')
     // const actualInvoiceText_serialize = JSON.stringify(actualInvoiceText)
     const invoiceDetailsObject_serialize = JSON.stringify(invoiceDetailsObject)
     const invoiceMoreDetailsObject_serialize = JSON.stringify(invoiceMoreDetailsObject)
@@ -299,6 +301,7 @@ function storeDataInSessionStorage(){
 
     const tableArray_serialize = JSON.stringify(tableArray)
 
+    localStorage.setItem('template',template)
     localStorage.setItem('actualInvoiceText',actualInvoiceText)
     localStorage.setItem('invoiceDetailsObject',invoiceDetailsObject_serialize)
     localStorage.setItem('invoiceMoreDetailsObject',invoiceMoreDetailsObject_serialize)
