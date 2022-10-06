@@ -46,11 +46,18 @@ router.get('/myInvoices', loggedIn, (req,res) => {
 })
 
 router.get('/viewInvoice', loggedIn, (req,res) => {
-
     if(req.user){
         res.render('viewInvoice', {status:'loggedIn', user:req.user, template:req.query.templateId})
     }else{
         res.render('viewInvoice', {status:'no', user:'nothing'})
+    }
+})
+
+router.get('/editSelectedInvoice', loggedIn, (req,res) => {
+    if(req.user){
+        res.render('editSelectedInvoice', {status:'loggedIn', user:req.user, invoiceId:req.query.invoiceUniqueId})
+    }else{
+        res.render('editSelectedInvoice', {status:'no', user:'nothing'})
     }
 })
 

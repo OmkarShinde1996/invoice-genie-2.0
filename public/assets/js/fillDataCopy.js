@@ -47,7 +47,6 @@ let tableArray_deSerialize
 
 
 const getDataFromDB = () => {
-    // console.log(receivedDataObject);
     const uniqueInvoiceId = {
         InvoiceUniqueId: sessionStorage.getItem('selectedInvoiceUniqueId')
     }
