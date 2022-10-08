@@ -65,15 +65,15 @@ function deleteRow() {
 function addCol(){
     counter++
     let header = document.querySelector(".column-header")
-    let itemsHeader = header.querySelector('#items-head')
+    let quantityHeader = header.querySelector('#quantity-head')
     let th = document.createElement('th')
     th.setAttribute('contenteditable','true')
     th.setAttribute('class','text-start')
     th.setAttribute('scope','col')
     th.setAttribute('id',`${counter}`)
     th.innerText = 'Click to edit'
-    itemsHeader.after(th)
-    tableCols.push(th)
+    quantityHeader.before(th)
+    tableCols.unshift(th)
     colsLength++
     // definedRowCells.push(`<input type="text" value="" id="enter-text" placeholder="Enter text">`)//code for inserting element at last in array
     definedRowCells.splice(2,0,`<input type="text" value="" id="enter-text" placeholder="Enter text">`)//line rewrited to insert element at 2nd position in array

@@ -239,7 +239,7 @@ function makeTableArray(){
     function tableToArray(table){
         let data = []
         let rowLength = table.rows.length
-        //Cpturing the header titles and storing it in data array on 0th index
+        //Capturing the header titles and storing it in data array on 0th index
         let headersTitles = []
         for(let x=0; x<table.rows[0].cells.length; x++){
             headersTitles[x] = table.rows[0].cells[x].innerText
