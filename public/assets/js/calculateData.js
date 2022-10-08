@@ -76,7 +76,7 @@ function allInOnePack(){
     makeAdditionalNotesObject()
     makeTableArray()
     getRequiredFields()
-    storeDataInSessionStorage()
+    storeDataInLocalStorage()
     getAllData()
 }
 ///////////////////////////////////////////////////////////////
@@ -266,7 +266,12 @@ function makeTableArray(){
 /////////////////////////// Function to convert Table to array ends here//////////////////////////
 let saveAndContinueBtn = document.querySelector('.save-and-continue-con a')
 window.onload = function(){
-    addRow()
+    // addRow()
+    if(document.querySelector('.table').rows.length == 1){
+        document.getElementById('notification-con').classList.remove('d-none')
+    }else{
+        document.getElementById('notification-con').classList.add('d-none')
+    }
     getRequiredFields()
 }
 
@@ -285,7 +290,7 @@ function getRequiredFields(){
 }
 
 
-function storeDataInSessionStorage(){
+function storeDataInLocalStorage(){
     const params = new URLSearchParams(window.location.search)
     const template = params.get('templateId')
     // const actualInvoiceText_serialize = JSON.stringify(actualInvoiceText)

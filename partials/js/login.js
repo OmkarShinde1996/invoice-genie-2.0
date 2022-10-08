@@ -1,4 +1,4 @@
-
+if(document.getElementById('form1') != null){
 form1.addEventListener('submit', () => {
     const login = {
         email: email.value,
@@ -23,3 +23,4 @@ form1.addEventListener('submit', () => {
         }
     })
 })
+}

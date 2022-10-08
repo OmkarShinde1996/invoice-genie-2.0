@@ -1,9 +1,8 @@
 const db = require('../routes/db-config')
 
-const saveDataToDB = async(req, res) => {
-    console.log(req.user);
+const updateDataToDB = async(req, res) => {
     if(!req.user){
-        return res.status(401).json({status:'error', error:`You must login before saving your invoice`})
+        return res.status(401).json({status:'error', error:`You must login to see your invoice`})
     }else{
         var username = req.user.username
     }
@@ -13,7 +12,7 @@ const saveDataToDB = async(req, res) => {
         if(result[0].length == 0){
             return res.json({status:'error', error:'You are not a registered user. Please Sign up first'})
         }else{
-            var uniqueInvoiceNumber = Date.now().toString()
+            var uniqueInvoiceNumber = req.body.uniqueInvoiceNumber
             var template = req.body.template
             var additionalNotesObject = req.body.additionalNotesObject
             var invoiceDetailsObject = req.body.invoiceDetailsObject
@@ -43,13 +42,13 @@ const saveDataToDB = async(req, res) => {
                 return res.status(400).json({status:'error', error:`Please provide proper inputs.`})
             }
             else{
-                db.query('INSERT INTO invoice_info SET ?', {username:username, templateId:template, uniqueInvoiceNumber:uniqueInvoiceNumber, additionalNotesObject:JSON.stringify(additionalNotesObject),invoiceDetailsObject:JSON.stringify(invoiceDetailsObject),termsAndConditionsObject:JSON.stringify(termsAndConditionsObject),tableArray:JSON.stringify(tableArray),actualInvoiceText:JSON.stringify(actualInvoiceText),invoiceMoreDetailsObject:JSON.stringify(invoiceMoreDetailsObject),toDetailsObject:JSON.stringify(toDetailsObject),logoImageUrl:JSON.stringify(logoImageUrl),totalTaxObject:JSON.stringify(totalTaxObject),bankDetailsObject:JSON.stringify(bankDetailsObject),fromDetailsObject:JSON.stringify(fromDetailsObject)}, (error,results) => {
+                db.query('UPDATE invoice_info SET ? WHERE uniqueInvoiceNumber = ?', [{username:username, templateId:template, uniqueInvoiceNumber:uniqueInvoiceNumber, additionalNotesObject:JSON.stringify(additionalNotesObject),invoiceDetailsObject:JSON.stringify(invoiceDetailsObject),termsAndConditionsObject:JSON.stringify(termsAndConditionsObject),tableArray:JSON.stringify(tableArray),actualInvoiceText:JSON.stringify(actualInvoiceText),invoiceMoreDetailsObject:JSON.stringify(invoiceMoreDetailsObject),toDetailsObject:JSON.stringify(toDetailsObject),logoImageUrl:JSON.stringify(logoImageUrl),totalTaxObject:JSON.stringify(totalTaxObject),bankDetailsObject:JSON.stringify(bankDetailsObject),fromDetailsObject:JSON.stringify(fromDetailsObject)}, uniqueInvoiceNumber], (error,results) => {
                     if(error)throw error
-                    return res.status(201).json({ status: 'success', success: 'Invoice saved successfully!' })
+                    return res.status(201).json({ status: 'success', success: 'Invoice updated successfully!' })
                 })
             }
         }
     })
 }
 
-module.exports = saveDataToDB
+module.exports = updateDataToDB

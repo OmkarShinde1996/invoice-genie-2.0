@@ -383,7 +383,7 @@ hr{
 }
 
 .progress.active:before{
-    animation: progress 8s linear forwards
+    animation: progress 7s linear forwards
 }
 
 @keyframes progress{

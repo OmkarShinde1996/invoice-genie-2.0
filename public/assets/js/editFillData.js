@@ -214,6 +214,7 @@ const getDataFromDB = () => {
                 }
             }
 
+            let table = document.querySelector('.table')
             //Setting up the columns
             if(tableArray_deSerialize[0].length > 5 && 'Total Deductions(Taxes)' in totalTaxObject_deSerialize == false){
                 let loopCount = tableArray_deSerialize[0].length - 5
@@ -223,36 +224,66 @@ const getDataFromDB = () => {
                 }
             }
 
+            if(tableArray_deSerialize[0].length > 6 && 'Total Deductions(Taxes)' in totalTaxObject_deSerialize == true){
+                let loopCount = tableArray_deSerialize[0].length - 6
+                for(let i = 0; i<loopCount; i++){
+                    document.getElementById('add-column').click()
+                    // document.getElementById(`${i+1}`).innerText = tableArray_deSerialize[0][2+i]
+                }
+                
+                let cellsLength = table.rows[0].cells.length
+                for(let j=0; j<cellsLength; j++){
+                    table.rows[0].cells[j].innerText = tableArray_deSerialize[0][j]
+                }
+                
+            }
+
             //Setting up the rows
             if(tableArray_deSerialize.length > 2){
                 for(let i = 0; i < tableArray_deSerialize.length-1; i++){
                     document.getElementById('add-new-item-line').click()
                 }
             }
-            let table = document.querySelector('.table')
+
+            
             let rowLength = table.rows.length
-            for(let i=1; i<=rowLength; i++){
+            for(let i=1; i<rowLength; i++){
                 let cellsLength = table.rows[i].cells.length
                 for(let j=1; j<cellsLength; j++){
                     table.rows[i].cells[j].children[0].value = tableArray_deSerialize[i][j]
                 }
                 document.getElementById('rate').dispatchEvent(new Event('keyup'))
             }
+
+            if('Discount(₹)' in totalTaxObject_deSerialize && Object.values(totalTaxObject_deSerialize)[1].split(';')[1].split(' ')[1] != "0"){
+                document.getElementById('discount-on-total').click()
+                document.getElementById('discount-amount').value = Object.values(totalTaxObject_deSerialize)[1].split(';')[1].split(' ')[1]
+                document.getElementById('discount-amount').dispatchEvent(new Event('input'))
+            }
+
+            if(Object.keys(bankDetailsObject_deSerialize).length != 0){
+                document.getElementById('add-bank-details').click()
+                document.getElementById('account-name').value = bankDetailsObject_deSerialize['Account Holder Name']
+                document.getElementById('account-number').value = bankDetailsObject_deSerialize['Account Number']
+                document.getElementById('account-ifsc').value = bankDetailsObject_deSerialize['Bank IFSC']
+                document.getElementById('account-type').value = bankDetailsObject_deSerialize['Account Type']
+                document.getElementById('bank-name').value = bankDetailsObject_deSerialize['Bank Name']
+                document.getElementById('upi-id').value = bankDetailsObject_deSerialize['UPI ID']
+            }
+
+            if(Object.keys(termsAndConditionsObject_deSerialize).length != 0){
+                document.getElementById('add-terms-conditions').click()
+                document.getElementById('terms-conditions').value = termsAndConditionsObject_deSerialize['Terms & Conditions']
+            }
+
+            if(Object.keys(additionalNotesObject_deSerialize).length != 0){
+                document.getElementById('add-additional-notes').click()
+                document.getElementById('additional-notes-text-area').value = additionalNotesObject_deSerialize['Additional Notes']
+            }
+
         }
     })
 }
 
 getDataFromDB()
 
-// template_deSerialize = data.success.templateId
-//             actualInvoiceText_deSerialize = JSON.parse(data.success.actualInvoiceText)
-//             invoiceDetailsObject_deSerialize = JSON.parse(data.success.invoiceDetailsObject)
-//             invoiceMoreDetailsObject_deSerialize = JSON.parse(data.success.invoiceMoreDetailsObject)
-//             logoImageUrl_deSerialize = JSON.parse(data.success.logoImageUrl)
-//             fromDetailsObject_deSerialize = JSON.parse(data.success.fromDetailsObject)
-//             toDetailsObject_deSerialize = JSON.parse(data.success.toDetailsObject)
-//             totalTaxObject_deSerialize = JSON.parse(data.success.totalTaxObject)
-//             bankDetailsObject_deSerialize = JSON.parse(data.success.bankDetailsObject)
-//             termsAndConditionsObject_deSerialize = JSON.parse(data.success.termsAndConditionsObject)
-//             additionalNotesObject_deSerialize = JSON.parse(data.success.additionalNotesObject)
-//             tableArray_deSerialize = JSON.parse(data.success.tableArray)

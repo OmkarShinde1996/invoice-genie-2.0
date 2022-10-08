@@ -34,7 +34,7 @@
                         <a href="/viewInvoice?templateId=${data.templates[index]}"><button type="button" id="${row[0]}-view" class=" btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
                         View
                         </button></a>
-                        <a href="/editSelectedInvoice?invoiceUniqueId=${row[0]}"><button type="button" id="${row[0]}-edit" class=" btn btn-outline-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                        <a href="/editSelectedInvoice?invoiceUniqueId=${row[0]}&templateId=${data.templates[index]}&type=update"><button type="button" id="${row[0]}-edit" class=" btn btn-outline-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
                         Edit
                         </button></a>
                         <button type="button" id="${row[0]}-delete" class=" btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
