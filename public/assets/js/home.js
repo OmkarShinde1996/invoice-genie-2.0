@@ -36,6 +36,11 @@ function addRow() {
     // console.log({normalCounter})
     addCellInRowFromRow(row) //insert cells in row
     tableRows.push(row)
+    if(document.querySelector('.table').rows.length == 1){
+        document.getElementById('notification-con').classList.remove('d-none')
+    }else{
+        document.getElementById('notification-con').classList.add('d-none')
+    }
 }
   
 function deleteRow() {
@@ -46,6 +51,11 @@ function deleteRow() {
     tableRows.pop()
     itemNo--
     // console.log(itemNo)
+    if(document.querySelector('.table').rows.length == 1){
+        document.getElementById('notification-con').classList.remove('d-none')
+    }else{
+        document.getElementById('notification-con').classList.add('d-none')
+    }
 }
 
 //**************************Code to insert column at the end****************************/
@@ -65,14 +75,14 @@ function deleteRow() {
 function addCol(){
     counter++
     let header = document.querySelector(".column-header")
-    let quantityHeader = header.querySelector('#quantity-head')
+    let itemHeader = header.querySelector('#items-head')
     let th = document.createElement('th')
     th.setAttribute('contenteditable','true')
     th.setAttribute('class','text-start')
     th.setAttribute('scope','col')
     th.setAttribute('id',`${counter}`)
     th.innerText = 'Click to edit'
-    quantityHeader.before(th)
+    itemHeader.after(th)
     tableCols.unshift(th)
     colsLength++
     // definedRowCells.push(`<input type="text" value="" id="enter-text" placeholder="Enter text">`)//code for inserting element at last in array

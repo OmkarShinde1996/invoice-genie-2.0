@@ -19,6 +19,102 @@
         <span class="visually-hidden">Loading...</span>
     </div>
     <i class="bi bi-check-circle-fill d-none" id="check"></i>
-    <button type="button" class="btn btn-primary" id="save-btn"><i class="bi bi-file-earmark-check me-2"></i>Save</button>
+
+    <%if(type == 'new'){%>
+        <button type="button" class="btn btn-primary" id="save-btn"><i class="bi bi-file-earmark-check me-2"></i>Save</button>
+    <%}else{%>
+        <button type="button" class="btn btn-primary" id="update-btn"><i class="bi bi-arrow-repeat me-2"></i>Update</button>
+    <%}%>
 </div>
 
+<%if(type == 'new'){%>
+    <script>
+        const saveInvoiceButton = document.getElementById('save-btn')
+
+        saveInvoiceButton.addEventListener('click', ()=>{
+            const invoice_data = {
+                template:template_deSerialize,
+                additionalNotesObject:additionalNotesObject_deSerialize,
+                invoiceDetailsObject:invoiceDetailsObject_deSerialize,
+                termsAndConditionsObject:termsAndConditionsObject_deSerialize,
+                tableArray:tableArray_deSerialize,
+                actualInvoiceText:actualInvoiceText_deSerialize,
+                invoiceMoreDetailsObject:invoiceMoreDetailsObject_deSerialize,
+                toDetailsObject:toDetailsObject_deSerialize,
+                logoImageUrl:logoImageUrl_deSerialize,
+                totalTaxObject:totalTaxObject_deSerialize,
+                bankDetailsObject:bankDetailsObject_deSerialize,
+                fromDetailsObject:fromDetailsObject_deSerialize,
+            }
+            fetch('/api/saveData', {
+                method: 'POST',
+                body: JSON.stringify(invoice_data),
+                headers:{
+                    'content-type': 'application/json'
+                }
+            }).then(res => res.json())
+            .then(data => {
+                if(data.status == 'error'){
+                    view_toast(error_toast,failed_progress_bar)
+                    // success.style.display = 'none'
+                    // error.style.display = 'block'
+                    toast_text2.innerText = data.error
+                }else{
+                    view_toast(success_toast,success_progress_bar)
+                    // error.style.display = 'none'
+                    // success.style.display = 'block'
+                    toast_text1.innerText = data.success
+                    save_btn.classList.add('disabled')
+                    save_btn.setAttribute('tabindex','-1')
+                }
+            })
+        })
+
+    </script>
+<%}else{%>
+    <script>
+        const updateInvoiceButton = document.getElementById('update-btn')
+
+        updateInvoiceButton.addEventListener('click', ()=>{
+            console.log();
+            const invoice_data = {
+                uniqueInvoiceNumber:uniqueInvoiceNumber,
+                template:template_deSerialize,
+                additionalNotesObject:additionalNotesObject_deSerialize,
+                invoiceDetailsObject:invoiceDetailsObject_deSerialize,
+                termsAndConditionsObject:termsAndConditionsObject_deSerialize,
+                tableArray:tableArray_deSerialize,
+                actualInvoiceText:actualInvoiceText_deSerialize,
+                invoiceMoreDetailsObject:invoiceMoreDetailsObject_deSerialize,
+                toDetailsObject:toDetailsObject_deSerialize,
+                logoImageUrl:logoImageUrl_deSerialize,
+                totalTaxObject:totalTaxObject_deSerialize,
+                bankDetailsObject:bankDetailsObject_deSerialize,
+                fromDetailsObject:fromDetailsObject_deSerialize,
+            }
+            fetch('/api/updateData', {
+                method: 'POST',
+                body: JSON.stringify(invoice_data),
+                headers:{
+                    'content-type': 'application/json'
+                }
+            }).then(res => res.json())
+            .then(data => {
+                if(data.status == 'error'){
+                    view_toast(error_toast,failed_progress_bar)
+                    // success.style.display = 'none'
+                    // error.style.display = 'block'
+                    toast_text2.innerText = data.error
+                }else{
+                    view_toast(success_toast,success_progress_bar)
+                    // error.style.display = 'none'
+                    // success.style.display = 'block'
+                    toast_text1.innerText = data.success
+                    update_btn.classList.add('disabled')
+                    update_btn.setAttribute('tabindex','-1')
+                }
+            })
+        })
+
+    </script>
+<%}%>

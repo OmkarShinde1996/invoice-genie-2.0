@@ -22,7 +22,7 @@ GET http://localhost:3000/api/validateJson
 
 ###
 
-POST http://localhost:3000/api/saveData
+POST http://localhost:3000/api/validateJson
 Content-Type: application/json
 
 {
@@ -44,7 +44,7 @@ Content-Type: application/json
   "invoiceMoreDetailsObject": {},
   "toDetailsObject": {
     "toTitle": "To",
-    "toName": "Aniket Shinde",
+    "toName": "Aniket' Shinde",
     "toAddress": "Maharashtra Nagar, Mankhurd",
     "toCity": "Navi Mumbai",
     "toState": "Maharashtra",

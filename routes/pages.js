@@ -5,6 +5,7 @@ const logout = require('../controllers/logout')
 
 
 let template = ""
+let type = ""
 
 router.get('/', loggedIn, (req,res)=>{
     if(req.user){
@@ -24,14 +25,27 @@ router.get('/fillInvoice', loggedIn, (req,res)=>{
         res.render('fill_invoice', {status:'no', user:'nothing'})
     }
     template = req.query.templateId
-    console.log(template);
+    // console.log(template);
+    type = req.query.type
+})
 
+router.get('/editSelectedInvoice', loggedIn, (req,res)=>{
+    if(req.user){
+        res.render('editSelectedInvoice', {status:'loggedIn', user:req.user})
+
+    }else{
+        res.render('editSelectedInvoice', {status:'no', user:'nothing'})
+    }
+    template = req.query.templateId
+    // console.log(template);
+    type = req.query.type
 })
 
 router.get('/invoiceGenerated', loggedIn, (req,res)=>{
-    console.log(template);
+    console.log({template});
+    console.log({type});
     if(req.user){
-        res.render(`${template}`, {status:'loggedIn', user:req.user})
+        res.render(`${template}`, {status:'loggedIn', user:req.user, type:type})
     }else{
         res.render(`${template}`, {status:'no', user:'nothing'})
     }

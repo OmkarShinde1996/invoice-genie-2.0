@@ -1,4 +1,5 @@
 
+if(document.getElementById('form2') != null){
 form2.addEventListener('submit', () => {
     const register = {
         username:username.value,
@@ -24,3 +25,4 @@ form2.addEventListener('submit', () => {
         }
     })
 })
+}

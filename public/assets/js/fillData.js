@@ -31,6 +31,7 @@ let fillAccType = document.getElementById('acc-type')
 let fillBankName = document.getElementById('bank-name')
 let fillUpiId = document.getElementById('upi-id')
 
+const uniqueInvoiceNumber = sessionStorage.getItem('selectedInvoiceUniqueId')
 const template_deSerialize = localStorage.getItem('template')
 const actualInvoiceText_deSerialize = localStorage.getItem('actualInvoiceText')
 const invoiceDetailsObject_deSerialize = JSON.parse(localStorage.getItem('invoiceDetailsObject'))
@@ -337,53 +338,12 @@ window.onload = function fillInvoice(){
 }
 
 
-
-const saveInvoiceButton = document.getElementById('save-btn')
-
-saveInvoiceButton.addEventListener('click', ()=>{
-    const invoice_data = {
-        template:template_deSerialize,
-        additionalNotesObject:additionalNotesObject_deSerialize,
-        invoiceDetailsObject:invoiceDetailsObject_deSerialize,
-        termsAndConditionsObject:termsAndConditionsObject_deSerialize,
-        tableArray:tableArray_deSerialize,
-        actualInvoiceText:actualInvoiceText_deSerialize,
-        invoiceMoreDetailsObject:invoiceMoreDetailsObject_deSerialize,
-        toDetailsObject:toDetailsObject_deSerialize,
-        logoImageUrl:logoImageUrl_deSerialize,
-        totalTaxObject:totalTaxObject_deSerialize,
-        bankDetailsObject:bankDetailsObject_deSerialize,
-        fromDetailsObject:fromDetailsObject_deSerialize,
-    }
-    fetch('/api/saveData', {
-        method: 'POST',
-        body: JSON.stringify(invoice_data),
-        headers:{
-            'content-type': 'application/json'
-        }
-    }).then(res => res.json())
-    .then(data => {
-        if(data.status == 'error'){
-            view_toast(error_toast,failed_progress_bar)
-            // success.style.display = 'none'
-            // error.style.display = 'block'
-            toast_text2.innerText = data.error
-        }else{
-            view_toast(success_toast,success_progress_bar)
-            // error.style.display = 'none'
-            // success.style.display = 'block'
-            toast_text1.innerText = data.success
-            save_btn.classList.add('disabled')
-            save_btn.setAttribute('tabindex','-1')
-        }
-    })
-})
-
 let success_toast = document.querySelector('.success_toast')
 let error_toast = document.querySelector('.error_toast')
 let success_progress_bar = document.getElementById('success_progress')
 let failed_progress_bar = document.getElementById('failed_progress')
 let save_btn = document.getElementById('save-btn')
+let update_btn = document.getElementById('update-btn')
 
 const view_toast = (toast_type, toast_progress) =>{
     toast_type.classList.remove('d-none')
@@ -394,3 +354,4 @@ const view_toast = (toast_type, toast_progress) =>{
         // toast_type.classList.remove('active')
     }, 7000)
 }
+
