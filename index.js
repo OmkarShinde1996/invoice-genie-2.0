@@ -23,10 +23,12 @@ app.use(cookie())
 app.use(express.json())
 app.use(fileUpload())
 
-db.connect((err) => {
-    if(err) throw err
-    console.log('DB Connected!');
-})
+// db.connect((err) => {
+//     if(err) throw err
+//     console.log('DB Connected!');
+// })
+
+
 
 app.use('/', require('./routes/pages').router)
 app.use('/api', require('./controllers/validate'))

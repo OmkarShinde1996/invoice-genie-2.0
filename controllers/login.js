@@ -20,6 +20,7 @@ const login = async(req,resp) => {
                 resp.cookie('userRegistered', token, cookieOptions)
                 return resp.json({status:'success', success:'User has been logged in!'})
             }
+            
         })
     }
 }
