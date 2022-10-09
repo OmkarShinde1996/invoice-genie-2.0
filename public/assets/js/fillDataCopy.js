@@ -74,12 +74,14 @@ const getDataFromDB = () => {
             termsAndConditionsObject_deSerialize = JSON.parse(data.success.termsAndConditionsObject)
             additionalNotesObject_deSerialize = JSON.parse(data.success.additionalNotesObject)
             tableArray_deSerialize = JSON.parse(data.success.tableArray)
+            fillInvoice()
         }
     })
 }
-
 getDataFromDB()
-window.onload = function fillInvoice(){
+
+function fillInvoice(){
+
     let amountInDecimal = totalTaxObject_deSerialize.Total.split('; ')
     let amountArray = amountInDecimal[1].split('.')
     let actualAmount = Number(amountArray[0])

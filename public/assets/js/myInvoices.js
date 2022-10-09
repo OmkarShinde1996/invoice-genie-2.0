@@ -108,7 +108,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>No data available</td>
+                    <td>Loading....</td>
                 </tr>
             </tbody>
         `;
