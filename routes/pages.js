@@ -10,10 +10,10 @@ let type = ""
 router.get('/', loggedIn, (req,res)=>{
     if(req.user){
         res.render('index', {status:'loggedIn', user:req.user})
-        console.log(req.user);
+        // console.log(req.user);
     }else{
         res.render('index', {status:'no', user:'nothing'})
-        console.log(req.user);
+        // console.log(req.user);
     }
 })
 
@@ -42,8 +42,8 @@ router.get('/editSelectedInvoice', loggedIn, (req,res)=>{
 })
 
 router.get('/invoiceGenerated', loggedIn, (req,res)=>{
-    console.log({template});
-    console.log({type});
+    // console.log({template});
+    // console.log({type});
     if(req.user){
         res.render(`${template}`, {status:'loggedIn', user:req.user, type:type})
     }else{
