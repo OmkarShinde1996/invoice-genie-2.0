@@ -25,3 +25,7 @@ Doing this to learn node js to develop backends for my future projects. :smiley:
 `07-10-2022` Half way through the Edit invoice functionality. Implementing logic to populate existing invoice information on edit invoice page.:relaxed:
 
 `08-10-2022` Completed the last part of the project which is Edit invoice and update it to the database.
+
+---
+### `09-10-2022` Finally the  :alarm_clock: Day when this app was Deployed on Render and the link is [invoicegenie.onrender.com](https://invoicegenie.onrender.com) :relaxed:
+---
