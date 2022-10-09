@@ -3,7 +3,7 @@
 let actualInvoiceText
 const invoiceBody = document.querySelector('invoice-logo')
 // const previousImgUrl = "https://omkarshinde1996.github.io/invoice-genie/assets/images/image-placeholder1.png"
-const previousImgUrl = "http://localhost:3000/assets/images/image-placeholder1.png"
+const previousImgUrl = "https://invoicegenie.onrender.com/assets/images/image-placeholder1.png"
 let logoImageUrl = {}
 
 // Invoice details block elements
