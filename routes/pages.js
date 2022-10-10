@@ -41,9 +41,10 @@ router.get('/invoiceGenerated', loggedIn, (req,res)=>{
     if(req.user){
         res.render(`${template}`, {status:'loggedIn', user:req.user, type:type})
     }else{
-        res.render(`${template}`, {status:'no', user:'nothing'})
+        res.render(`${template}`, {status:'no', user:'nothing', type:type})
     }
 })
+
 
 router.get('/myInvoices', loggedIn, (req,res) => {
     if(req.user){
